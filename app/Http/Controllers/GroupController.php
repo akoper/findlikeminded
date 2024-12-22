@@ -23,7 +23,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('group.create');
+        return view('groups.create');
     }
 
     /**

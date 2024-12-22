@@ -61,17 +61,20 @@
                         @endif
                     </header>
 
-                    <!-- ################ header begins here ################ -->
+                    <!-- ################ header ends here ################ -->
 
                     <main>
                         <div class="grid gap-6 lg:gap-8">
+
+<a href="{{ url('groups/create') }}" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-4 px-6 w-40 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-center">Create Group</a>
 
                         <p class="text-lg lg:text-2xl">Likeminded is web application where you can search for topics you're interested in,
                             discover groups about them, join the groups and meet people with similar interests.</p>
 
                         <img src={{ asset('images/happy-people-homepage.jpg') }} class="w-full" alt="People happy because they used likeminded">
 
-                        <p class="text-lg lg:text-2xl">It's like meetup. However, Meetup charges the meetup organizer $22 a month. 
+                        <p class="text-lg lg:text-2xl">It's like meetup. However, Meetup charges the meetup organizer 
+                            $22 a month. 
                             Most organizers can't afford to pay that very long, so they stop paying and then Meetup deletes the group. With
                             Likeminded, each user get to join three groups for free, and then they pay a little for
                             each group they're in.  So the group and all of that value don't go away.
@@ -80,9 +83,9 @@
                             <form action="/search" method="post">
                                 @csrf
                                 <div class="mb-3 pt-0">
-                                    <input type="text"  placeholder="Interest and location" class="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full  lg:w-96"/>
+                                    <input type="text"  placeholder="Interest and location" class="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full lg:w-96"/>
 
-                                    <button class="bg-red-600 hover:bg-red-400 text-white font-bold py-4 px-6 mt-4 lg:mt-0 rounded">Search</button>
+                                    <button class="bg-red-600 hover:bg-red-400 text-white w-40 font-bold py-4 px-6 mt-4 lg:mt-0 rounded-lg">Search</button>
                                 </div>
                             </form>
                         </div>
