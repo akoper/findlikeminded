@@ -32,7 +32,13 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $group = new Group();
+        $group->fill($validated);
+        $group->owner_id = auth()->user()->id;
+        $group->save();
+
+        return redirect('/dashboard');
     }
 
     /**

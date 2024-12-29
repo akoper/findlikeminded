@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
 //    Route::get('/groups', [GroupController::class, 'edit'])->name('groups.edit');
     Route::patch('/groups', [GroupController::class, 'update'])->name('groups.update');
     Route::delete('/groups', [GroupController::class, 'destroy'])->name('groups.destroy');
+    Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
+    Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
 });
 
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');

@@ -1,6 +1,18 @@
 <x-app-layout>
 
-    <p class="mb-5 text-2xl font-bold">{{ $group->title }}</p>
+    <div class="flex mb-5">
+        <div class="flex-1  text-2xl font-bold">{{ $group->title }}</div>
+        <div class="flex-none w-32">
+            <form action="/groups/join" method="post">
+                @csrf
+                <div class="">
+                    <input type="hidden" name="group_id" value="{{ $group->id }}" id="group_id" />
+
+                    <button class="px-6 py-2 text-sm bg-green-600 hover:bg-green-400 text-white font-bold lg:mt-0 rounded-lg">Join Group</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="mb-5">
         <span class="font-bold">Description:</span> {{ $group->description ?? ''}}
