@@ -13,7 +13,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::all();
+        $groups = Group::where('owner_id', auth()->user()->id)->get();
 
         return view('groups.index', compact('groups'));
     }
