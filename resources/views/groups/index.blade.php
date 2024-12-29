@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <h3 class="my-3 font-bold">Groups</h3>
+    <p class="mb-5 text-2xl font-bold">Groups</p>
 
         <table class="border table-auto border-collapse min-w-full">
             <thead>

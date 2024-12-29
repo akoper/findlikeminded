@@ -1,6 +1,9 @@
 <x-app-layout>
-  <div class="w-full max-w-xs">
-    <form method="POST" action="/group" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+    <p class="mb-5 text-2xl font-bold">Create Group</p>
+
+{{--  <div class="w-full max-w-xs">--}}
+    <form method="POST" action="/group">
     @csrf
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Title</label>
@@ -20,5 +23,5 @@
         </button>
       </div>
     </form>
-  </div>
+{{--  </div>--}}
 </x-app-layout>

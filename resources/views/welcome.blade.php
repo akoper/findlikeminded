@@ -64,17 +64,21 @@
                     <!-- ################ header ends here ################ -->
 
                     <main>
-                        <div class="grid gap-6 lg:gap-8">
+                            <div class="pb-12">
+                                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                                        <div class="p-6 text-gray-900 dark:text-gray-100">
 
-<a href="{{ url('groups/create') }}" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-4 px-6 w-40 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-center">Create Group</a>
+                            <a href="{{ url('groups/create') }}" class="inline-block mb-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-4 px-6 w-40 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-center">Create Group</a>
+
 
                         <p class="text-lg lg:text-2xl">Likeminded is web application where you can search for topics you're interested in,
                             discover groups about them, join the groups and meet people with similar interests.</p>
 
                         <img src={{ asset('images/happy-people-homepage.jpg') }} class="w-full" alt="People happy because they used likeminded">
 
-                        <p class="text-lg lg:text-2xl">It's like meetup. However, Meetup charges the meetup organizer 
-                            $22 a month. 
+                        <p class="text-lg lg:text-2xl">It's like meetup. However, Meetup charges the meetup organizer
+                            $24 a month.
                             Most organizers can't afford to pay that very long, so they stop paying and then Meetup deletes the group. With
                             Likeminded, each user get to join three groups for free, and then they pay a little for
                             each group they're in.  So the group and all of that value don't go away.
@@ -90,9 +94,12 @@
                             </form>
                         </div>
 
-                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+{{--                        </div>--}}
                     </main>
-
 
                 </div>
             </div>
