@@ -8,10 +8,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [GroupController::class, 'index'])->name('dashboard');
 
@@ -21,15 +17,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
     Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
-//    Route::get('/groups', [GroupController::class, 'edit'])->name('group.edit');
+    Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');
+//    Route::get('/groups', [GroupController::class, 'edit'])->name('groups.edit');
     Route::patch('/groups', [GroupController::class, 'update'])->name('groups.update');
     Route::delete('/groups', [GroupController::class, 'destroy'])->name('groups.destroy');
 });
 
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');
-
-//Route::post('/groups/search', function () {
-//    return view('dashboard');
-//})
 
 require __DIR__.'/auth.php';

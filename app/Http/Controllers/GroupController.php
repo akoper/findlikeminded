@@ -40,7 +40,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        //
+        return view('groups.show', ['group' => $group]);
     }
 
     /**

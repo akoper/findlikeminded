@@ -13,7 +13,7 @@
             <tbody>
             @foreach($groups as $group)
                 <tr>
-                    <td class="border p-2">{{ $group->title }}</td>
+                    <td class="border p-2"><a class="text-blue-600 underline" href="/groups/{{ $group->id }}">{{ $group->title }}</a></td>
                     <td class="border p-2">{{ $group->description ?? ''}}</td>
                     <td class="border p-2">{{ $group->location ?? '' }}</td>
                 </tr>
