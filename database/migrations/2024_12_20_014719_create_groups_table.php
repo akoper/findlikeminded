@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 300);
+            $table->string('name', 300);
             $table->text('description')->nullable();
             $table->string('location', 300)->nullable();
             $table->integer('owner_id');

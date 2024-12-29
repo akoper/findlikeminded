@@ -46,13 +46,13 @@ class DatabaseSeeder extends Seeder
 
         // group #1
         Group::factory()->create([
-            'title' => 'JavaScript',
+            'name' => 'JavaScript',
             'description' => 'Detroit JavaScript',
         ]);
 
         // group #2
         Group::factory()->create([
-            'title' => 'PHP',
+            'name' => 'PHP',
             'description' => 'Detroit PHP',
         ]);
 

@@ -50,7 +50,6 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-//        dd($group);
         return view('groups.show', ['group' => $group]);
     }
 
@@ -85,8 +84,20 @@ class GroupController extends Controller
     {
         $name = $request->input('name');
 
-        $groups = Group::where('title', 'like', "%{$name}%")->get();
+        $groups = Group::where('name', 'like', "%{$name}%")->get();
 
         return view('groups.index', compact('groups'));
     }
+
+    /**
+     * this is a little temp method to help with development and testing
+     * Display a listing of the resource.
+     */
+    public function all()
+    {
+        $groups = Group::all();
+
+        return view('groups.index', compact('groups'));
+    }
+
 }

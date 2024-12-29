@@ -6,11 +6,11 @@
         @csrf
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Title</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
             <input
                 class="required shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="title" id="title" type="text">
-            @error('title')
+                name="name" id="name" type="text">
+            @error('name')
             <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
         </div>

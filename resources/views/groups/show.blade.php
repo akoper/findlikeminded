@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <div class="flex mb-5">
-        <div class="flex-1  text-2xl font-bold">{{ $group->title }}</div>
+        <div class="flex-1  text-2xl font-bold">{{ $group->name }}</div>
         <div class="flex-none w-32">
             <form action="/groups/join" method="post">
                 @csrf
@@ -35,7 +35,7 @@
         <span class="font-bold">Events:</span>
         <ul>
 {{--            @foreach($group->events as $event)--}}
-{{--                <li><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->title }}</a></li>--}}
+{{--                <li><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->name }}</a></li>--}}
 {{--            @endforeach--}}
         </ul>
     </div>

@@ -12,7 +12,7 @@ class Group extends Model
     use HasFactory;
 
      protected $fillable = [
-        'title',
+        'name',
         'description',
         'location',
         'owner_id',

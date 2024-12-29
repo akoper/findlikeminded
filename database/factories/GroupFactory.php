@@ -17,7 +17,7 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence($nbWords = 3, $variableNbWords = true),
+            'name' => fake()->sentence($nbWords = 3, $variableNbWords = true),
             'description' => fake()->paragraph($nbrSentances = 3),
             'location' => fake()->city(),
             'owner_id' => fake()->numberBetween(1,10)

@@ -8,6 +8,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/groups/all', [GroupController::class, 'all'])->name('groups.all'); // temp dev route
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [GroupController::class, 'index'])->name('dashboard');
 
@@ -26,5 +29,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');
+
 
 require __DIR__.'/auth.php';
