@@ -6,15 +6,26 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                         <a href="{{ route('dashboard') }}" class="inline-block text-4xl font-extrabold">Likeminded</a>
-                    </a>
                 </div>
 
-                <!-- Navigation Links -->
-{{--                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">--}}
-{{--                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">--}}
-{{--                        {{ __('Dashboard') }}--}}
-{{--                    </x-nav-link>--}}
-{{--                </div>--}}
+                {{-- create group button --}}
+                <div class="shrink-0 flex items-center ml-10 mr-14">
+                    <a href="{{ url('/groups/create') }}" class="px-6 py-2 w-40 inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-center">Create Group</a>
+                </div>
+
+                {{-- search groups form --}}
+                <div class="text-center mt-3">
+                    <form action="/groups/search" method="post">
+                        @csrf
+                        <div class="">
+                            <input type="text" name="name" id="name" placeholder="Name/Subject" class="px-3 py-2 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full md:w-52"/>
+                            <input type="text" name="location" id="location" placeholder="Location" class="px-3 py-2 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full md:w-52"/>
+
+                            <button class="px-6 py-2 text-sm bg-red-600 hover:bg-red-400 text-white font-bold lg:mt-0 rounded-lg">Search Groups</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
 
             <!-- Settings Dropdown -->

@@ -22,10 +22,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
     Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
 //    Route::get('/groups', [GroupController::class, 'edit'])->name('group.edit');
-    Route::patch('/groups', [GroupController::class, 'update'])->name('group.update');
-    Route::delete('/groups', [GroupController::class, 'destroy'])->name('group.destroy');
+    Route::patch('/groups', [GroupController::class, 'update'])->name('groups.update');
+    Route::delete('/groups', [GroupController::class, 'destroy'])->name('groups.destroy');
 });
 
-// Route::resource('groups', GroupController::class)->withTrashed();
+Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');
+
+//Route::post('/groups/search', function () {
+//    return view('dashboard');
+//})
 
 require __DIR__.'/auth.php';

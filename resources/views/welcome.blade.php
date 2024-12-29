@@ -84,10 +84,10 @@
                             each group they're in.  So the group and all of that value don't go away.
                         </p>
                         <div class="text-center">
-                            <form action="/search" method="post">
+                            <form action="/groups/search" method="post">
                                 @csrf
                                 <div class="mb-3 pt-0">
-                                    <input type="text"  placeholder="Interest and location" class="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full lg:w-96"/>
+                                    <input type="text" name="name" id="name" placeholder="Interest and location" class="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full lg:w-96"/>
 
                                     <button class="bg-red-600 hover:bg-red-400 text-white w-40 font-bold py-4 px-6 mt-4 lg:mt-0 rounded-lg">Search</button>
                                 </div>
