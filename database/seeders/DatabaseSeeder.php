@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Group;
+use App\Models\GroupUser;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,12 +25,54 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'password' => Hash::make('asdfasd'),
+            'password' => Hash::make('asdfasdf'),
             'email' => 'test@example.com',
         ]);
 
+        // this is test data for the group_user relationship specifically, per Mike
+        // user #3
+        User::factory()->create([
+            'name' => 'Jason JavaScript',
+            'password' => Hash::make('asdfasdf'),
+            'email' => 'test1@example.com',
+        ]);
+
+        // user #4
+        User::factory()->create([
+            'name' => 'Phil PHP',
+            'password' => Hash::make('asdfasdf'),
+            'email' => 'test2@example.com',
+        ]);
+
+        // group #1
+        Group::factory()->create([
+            'title' => 'JavaScript',
+            'description' => 'Detroit JavaScript',
+        ]);
+
+        // group #2
+        Group::factory()->create([
+            'title' => 'PHP',
+            'description' => 'Detroit PHP',
+        ]);
+
+        GroupUser::factory()->create([
+            'group_id' => 1,
+            'user_id' => 3,
+        ]);
+
+        GroupUser::factory()->create([
+            'group_id' => 1,
+            'user_id' => 4,
+        ]);
+
+        GroupUser::factory()->create([
+            'group_id' => 2,
+            'user_id' => 4,
+        ]);
+
         User::factory(10)->create();
-        \App\Models\User::factory(10)->create();
-        \App\Models\Group::factory(20)->create();
+        Group::factory(30)->create();
+        GroupUser::factory(50)->create();
     }
 }

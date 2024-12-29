@@ -16,6 +16,10 @@ class GroupController extends Controller
     {
         $groups = Group::where('owner_id', auth()->user()->id)->get();
 
+//        $groups = Group::whereHas('user', function($q) use($userIds) {
+//            $q->whereIn('id', $userIds);
+//        })->get();
+
         return view('groups.index', compact('groups'));
     }
 
@@ -46,6 +50,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
+//        dd($group);
         return view('groups.show', ['group' => $group]);
     }
 
