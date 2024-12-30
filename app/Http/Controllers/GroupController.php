@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -13,12 +14,8 @@ class GroupController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $groups = Group::where('owner_id', auth()->user()->id)->get();
-
-//        $groups = Group::whereHas('user', function($q) use($userIds) {
-//            $q->whereIn('id', $userIds);
-//        })->get();
+    {   // query from many-to-many relationship tables - think this works 12/29
+        $groups = User::find(auth()->user()->id)->groups()->get();
 
         return view('groups.index', compact('groups'));
     }
