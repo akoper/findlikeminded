@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Event;
 use App\Models\Group;
 use App\Models\GroupUser;
 use App\Models\User;
@@ -74,5 +75,6 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Group::factory(30)->create();
         GroupUser::factory(50)->create();
+        Event::factory(25)->create();
     }
 }

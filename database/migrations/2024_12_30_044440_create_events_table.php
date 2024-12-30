@@ -11,11 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
             $table->text('description')->nullable();
             $table->string('location', 255)->nullable();
+            $table->string('address', 255)->nullable();
+            $table->date('start_date');
+            $table->time('start_time');
+            $table->date('end_date');
+            $table->time('end_time');
+            $table->integer('group_id');
             $table->integer('owner_id');
             $table->timestamps();
         });
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('events');
     }
 };
