@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/groups', [GroupController::class, 'destroy'])->name('groups.destroy');
     Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
     Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
+    Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
 });
 
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');

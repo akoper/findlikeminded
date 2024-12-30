@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
+use App\Models\GroupUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,9 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        return view('groups.show', ['group' => $group]);
+        $inGroup = User::find(auth()->user()->id)->groups()->where('group_id', $group->id)->exists();
+
+        return view('groups.show', ['group' => $group, 'inGroup' => $inGroup]);
     }
 
     /**
@@ -95,6 +98,26 @@ class GroupController extends Controller
         $groups = Group::all();
 
         return view('groups.index', compact('groups'));
+    }
+
+    public function join(Request $request)
+    {
+        $gu = new GroupUser();
+        $gu->group_id = $request->input('group_id');
+        $gu->user_id = auth()->user()->id;
+        $gu->save();
+
+        return redirect('/dashboard');
+    }
+
+    public function leave(Request $request)
+    {
+        $group_id = $request->input('group_id');
+        $user_id = auth()->user()->id;
+
+        $deleted = GroupUser::where('group_id', $group_id)->where('user_id', $user_id)->delete();
+
+        return redirect('/dashboard');
     }
 
 }
