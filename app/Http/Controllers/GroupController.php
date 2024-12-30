@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateGroupRequest;
 use App\Models\GroupUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
@@ -18,7 +19,9 @@ class GroupController extends Controller
     {   // query from many-to-many relationship tables - think this works 12/29
         $groups = User::find(auth()->user()->id)->groups()->get();
 
-        return view('groups.index', compact('groups'));
+        $user_name = Auth::user()->name;
+
+        return view('groups.index', ['groups' => $groups, 'user_name' => $user_name]);
     }
 
     /**

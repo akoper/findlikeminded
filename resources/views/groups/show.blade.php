@@ -43,9 +43,9 @@
     <div class="mb-5">
         <span class="font-bold">Events:</span>
         <ul>
-{{--            @foreach($group->events as $event)--}}
-{{--                <li><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->name }}</a></li>--}}
-{{--            @endforeach--}}
+            @foreach($group->events as $event)
+                <li><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->name }}</a></li>
+            @endforeach
         </ul>
     </div>
 

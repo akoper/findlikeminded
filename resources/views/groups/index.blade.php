@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <p class="mb-5 text-2xl font-bold">Groups</p>
+    <p class="mb-5 text-2xl font-bold">{{ $user_name }}'s Groups</p>
 
         <table class="border table-auto border-collapse min-w-full">
             <thead>
