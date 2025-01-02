@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Models\Group;
+use Illuminate\Http\RedirectResponse;
 
 class EventController extends Controller
 {
@@ -21,7 +23,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $group_id = request()->input('group_id');
+
+        return view('events.create', ['group_id' => $group_id]);
     }
 
     /**
@@ -29,7 +33,13 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $event = new Event();
+        $event->fill($validated);
+        $event->owner_id = auth()->user()->id;
+        $event->save();
+
+        return redirect('/dashboard');
     }
 
     /**
@@ -37,7 +47,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        return view('events.show', ['event' => $event]);
     }
 
     /**
@@ -59,8 +69,9 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(Event $event): RedirectResponse
     {
-        //
+        $event->delete();
+        return back();
     }
 }

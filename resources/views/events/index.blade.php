@@ -1,10 +1,6 @@
 <x-app-layout>
 
-    @isset($user_name)
-        <p class="mb-5 text-2xl font-bold">{{ $user_name }}'s Groups</p>
-    @else
-        <p class="mb-5 text-2xl font-bold">Search Results for {{ $name }}</p>
-    @endif
+    <p class="mb-5 text-2xl font-bold">{{ $user_name }}'s Groups</p>
 
         <table class="border table-auto border-collapse min-w-full">
             <thead>

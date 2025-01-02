@@ -7,6 +7,7 @@ use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\GroupUser;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,6 +52,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
+        // boolean: is this user in this group?
         $inGroup = User::find(auth()->user()->id)->groups()->where('group_id', $group->id)->exists();
 
         return view('groups.show', ['group' => $group, 'inGroup' => $inGroup]);
@@ -75,9 +77,10 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Group $group)
+    public function destroy(Group $group): RedirectResponse
     {
-        //
+        $group->delete();
+        return back();
     }
 
     /**
@@ -89,7 +92,7 @@ class GroupController extends Controller
 
         $groups = Group::where('name', 'like', "%{$name}%")->get();
 
-        return view('groups.index', compact('groups'));
+        return view('groups.index', ['groups' => $groups, 'name' => $name]);
     }
 
     /**

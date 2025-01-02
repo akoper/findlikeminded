@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
     Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
     Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
+
+    Route::resource('events', EventController::class);
 });
 
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');

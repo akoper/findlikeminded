@@ -49,4 +49,6 @@
         </ul>
     </div>
 
+    <a href="{{ route('events.create', ['group_id' => $group->id]) }}" class="py-2 w-40 inline-block text-white bg-orange-600 hover:bg-orange-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm   focus:outline-none text-center">Create Event</a>
+
 </x-app-layout>
