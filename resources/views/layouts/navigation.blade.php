@@ -2,7 +2,6 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex h-72 flex-col sm:flex-row justify-center sm:h-16 md:justify-between">
-{{--            <div class="flex">--}}
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center justify-center sm:align-middle">
                     <a href="{{ route('dashboard') }}" class="inline-block text-4xl font-extrabold sm:text-2xl lg:text-4xl">Likeminded</a>
@@ -20,7 +19,7 @@
                         @csrf
                         <div>
                             <input type="text" name="name" id="name" placeholder="Topic"
-                                   class="w-full sm:w-20 md:w-40 lg:w-40 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
+                                   class="w-full mb-1 sm:w-20 sm:mb-0 md:w-40 lg:w-40 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
                             <input type="text" name="location" id="location" placeholder="Location"
                                    class="w-full sm:w-20 md:w-40 lg:w-40 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
 
@@ -28,8 +27,6 @@
                         </div>
                     </form>
                 </div>
-
-{{--            </div>--}}
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-2 md:ms-6">
