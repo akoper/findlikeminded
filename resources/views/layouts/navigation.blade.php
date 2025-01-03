@@ -1,35 +1,38 @@
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
+        <div class="flex h-72 flex-col sm:flex-row justify-center sm:h-16 md:justify-between">
+{{--            <div class="flex">--}}
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                        <a href="{{ route('dashboard') }}" class="inline-block text-4xl font-extrabold">Likeminded</a>
+                <div class="shrink-0 flex items-center justify-center sm:align-middle">
+                    <a href="{{ route('dashboard') }}" class="inline-block text-4xl font-extrabold sm:text-2xl lg:text-4xl">Likeminded</a>
                 </div>
 
                 {{-- create group button --}}
-                <div class="shrink-0 flex items-center ml-10 mr-12">
-                    <a href="{{ url('/groups/create') }}" class="px-6 py-2 w-40 inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-center">Create Group</a>
+                <div class="shrink-0 flex items-center">
+                    <a href="{{ url('/groups/create') }}"
+                       class="w-full py-2 mt-3 sm:w-32 sm:mt-0 sm:mx-2 md:mx-5 md:w-36 md:px-6 lg:w-40 xl:mx-14 xl:w-40 inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Create Group</a>
                 </div>
 
-                {{-- search groups form --}}
-                <div class="text-center mt-3">
+{{--                 search groups form--}}
+                <div class="text-center sm:flex items-center w-full mt-3 sm:mt-0">
                     <form action="/groups/search" method="post">
                         @csrf
-                        <div class="">
-                            <input type="text" name="name" id="name" placeholder="Name/Subject" class="px-3 py-2 w-full md:w-52 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
-                            <input type="text" name="location" id="location" placeholder="Location" class="px-3 py-2 w-full md:w-48 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
+                        <div>
+                            <input type="text" name="name" id="name" placeholder="Topic"
+                                   class="w-full sm:w-20 md:w-40 lg:w-40 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
+                            <input type="text" name="location" id="location" placeholder="Location"
+                                   class="w-full sm:w-20 md:w-40 lg:w-40 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
 
-                            <button class="px-6 py-2 text-sm bg-red-600 hover:bg-red-400 text-white font-bold lg:mt-0 rounded-lg">Search Groups</button>
+                            <button class="w-full py-2 mt-2 sm:w-16 sm:mt-0 md:px-3 lg:w-32 lg:ml-2 xl:w-40 inline-block text:px-6 text-sm bg-red-600 hover:bg-red-400 text-white font-bold rounded-lg">Search</button>
                         </div>
                     </form>
                 </div>
 
-            </div>
+{{--            </div>--}}
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center sm:ms-2 md:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">

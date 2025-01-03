@@ -27,7 +27,7 @@
 
                     <!-- ################ header begins here ################ -->
 
-                    <header class="grid grid-cols-2 items-center gap-2 py-10 ">
+                    <header class="grid grid-cols-2 items-center gap-2 py-8 ">
                         <div class="flex ">
                             <a href="{{ url('/') }}" class="inline-block text-4xl font-extrabold">Likeminded</a>
                         </div>
@@ -69,31 +69,44 @@
                                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                                         <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                            <a href="{{ url('groups/create') }}" class="inline-block mb-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-4 px-6 w-40 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-center">Create Group</a>
-
-
-                        <p class="text-lg lg:text-2xl">Likeminded is web application where you can search for topics you're interested in,
+                        <p class="text-lg lg:text-2xl my-3">Likeminded is web application where you can search for topics you're interested in,
                             discover groups about them, join the groups and meet people with similar interests.</p>
 
-                        <img src={{ asset('images/happy-people-homepage.jpg') }} class="w-full" alt="People happy because they used likeminded">
+                        <div class="flex items-center flex-col sm:flex-row sm:justify-between">
+                            <div class="flex items-center">
+                                <a href="{{ url('groups/create') }}"
+                                   class="w-40 py-4 px-6 sm:px-3 sm:w-36 inline-block mb-4 sm:mb-0 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg focus:outline-none text-center">
+                                    Create Group</a>
 
-                        <p class="text-lg lg:text-2xl">It's like meetup. However, Meetup charges the meetup organizer
-                            $24 a month.
-                            Most organizers can't afford to pay that very long, so they stop paying and then Meetup deletes the group. With
-                            Likeminded, each user get to join three groups for free, and then they pay a little for
-                            each group they're in.  So the group and all of that value don't go away.
-                        </p>
-                        <div class="text-center">
-                            <form action="/groups/search" method="post">
-                                @csrf
-                                <div class="mb-3 pt-0">
-                                    <input type="text" name="name" id="name" placeholder="Interest and location" class="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full lg:w-96"/>
+                            </div>
+                            <div class="flex items-center">
 
-                                    <button class="bg-red-600 hover:bg-red-400 text-white w-40 font-bold py-4 px-6 mt-4 lg:mt-0 rounded-lg">Search</button>
+                                <div class="text-center">
+                                    <form action="/groups/search" method="post">
+                                        @csrf
+                                        <div class="mb-3 pt-0">
+                                            <input type="text" name="name" id="name" placeholder="Topic"
+                                                   class="w-full px-3 py-4 sm:w-44 md:w-44 lg:w-56 lg:max-w-80  placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring "/>
+
+                                            <button class="w-40 font-bold py-4 px-6 sm:w-36 sm:px-3 mt-4  lg:mt-0 bg-red-600 hover:bg-red-400 text-white rounded-lg">
+                                                Search Groups</button>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+
+                            </div>
                         </div>
 
+                        <img src={{ asset('images/homepage.jpg') }} class="w-full mt-4" alt="People happy because they used likeminded">
+
+                        <p class="text-lg lg:text-2xl mt-3 mb-10">It's like meetup. However, Meetup charges the meetup organizer
+                            $29 a month.
+                            Most organizers can't afford to pay this very long, so they stop paying and then
+                            Meetup deletes the group. With
+                            Likeminded, each user get to join two groups for free. If they want to join more
+                            groups than two, then they pay $1 per group per month.  This way, the cost is split up among
+                            many people, and the group, value, connections, friendships, learning and joy continue!
+                        </p>
                                         </div>
                                     </div>
                                 </div>
