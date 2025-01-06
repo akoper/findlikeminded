@@ -4,7 +4,7 @@
         <div class="flex h-72 flex-col sm:flex-row justify-center sm:h-16 md:justify-between">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center justify-center sm:align-middle">
-                    <a href="{{ route('dashboard') }}" class="inline-block text-4xl font-extrabold sm:text-2xl lg:text-4xl">Likeminded</a>
+                    <a href="{{ route('dashboard') }}" class="inline-block text-4xl font-extrabold sm:text-2xl lg:text-4xl">Mutual Interest</a>
                 </div>
 
                 {{-- create group button --}}

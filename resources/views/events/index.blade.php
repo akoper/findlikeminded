@@ -15,7 +15,7 @@
                 <tr>
                     <td class="border p-2"><a class="text-blue-600 underline" href="/groups/{{ $group->id }}">{{ $group->name }}</a></td>
                     <td class="border p-2">{{ $group->description ?? ''}}</td>
-                    <td class="border p-2">{{ $group->location ?? '' }}</td>
+                    <td class="border p-2">{{ $group->location_id ?? '' }}</td>
                 </tr>
             @endforeach
             </tbody>
