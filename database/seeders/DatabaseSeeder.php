@@ -8,6 +8,7 @@ use App\Models\GroupUser;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -71,10 +72,21 @@ class DatabaseSeeder extends Seeder
             'group_id' => 2,
             'user_id' => 4,
         ]);
+        $this->command->info('Specific test user and group data seeded');
 
         User::factory(10)->create();
+        $this->command->info('User table seeded');
         Group::factory(30)->create();
+        $this->command->info('Group table seeded');
         GroupUser::factory(50)->create();
+        $this->command->info('GroupUser table seeded');
         Event::factory(25)->create();
+        $this->command->info('Event table seeded');
+
+
+        // create the location table ("city, ST") from the 28,000 line .sql file
+        $path = 'app/sql/locations.sql';
+        DB::unprepared(file_get_contents($path));
+        $this->command->info('location table of 28,000 cities from .sql file created and seeded!');
     }
 }

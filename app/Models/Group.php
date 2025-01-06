@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 
 class Group extends Model
 {
@@ -16,7 +18,7 @@ class Group extends Model
      protected $fillable = [
         'name',
         'description',
-        'location',
+        'location_id',
         'owner_id',
     ];
 
@@ -28,5 +30,11 @@ class Group extends Model
     public function events(): HasMany
     {
         return $this->hasMany(Event::class);
+    }
+
+
+    public function location(): HasOne
+    {
+        return $this->hasOne(Location::class);
     }
 }

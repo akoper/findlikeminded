@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->text('description')->nullable();
-            $table->string('location', 255)->nullable();
+            $table->integer('location_id');
             $table->integer('owner_id');
             $table->timestamps();
         });

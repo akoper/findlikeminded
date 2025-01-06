@@ -28,7 +28,7 @@
     </div>
 
     <div class="mb-5">
-        <span class="font-bold">Location:</span> {{ $group->location ?? '' }}
+        <span class="font-bold">Location:</span> {{ $group->location->CITY ?? '' }}
     </div>
 
     <div class="mb-5">
