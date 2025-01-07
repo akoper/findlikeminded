@@ -24,7 +24,7 @@ class UpdateGroupRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'location' => 'nullable|string'
+            'location_id' => 'integer|string'
         ];
     }
 }

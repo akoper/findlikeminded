@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>MutualInterest.io - Meetup.com alternative - discover likeminded people</title>
+        <title>FindLikeMinded.com - Meetup.com alternative - discover likeminded people</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -29,7 +29,7 @@
 
                     <header class="grid grid-cols-2 items-center gap-2 py-8 ">
                         <div class="flex ">
-                            <a href="{{ url('/') }}" class="inline-block text-4xl font-extrabold">MutualInterest.io</a>
+                            <a href="{{ url('/') }}" class="inline-block text-4xl font-extrabold">FindLikeMinded.com</a>
                         </div>
                         @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end">
@@ -69,7 +69,7 @@
                                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                                         <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                        <p class="text-lg lg:text-2xl my-3">MutualInterest.io is web application where you can search for topics you're interested in,
+                        <p class="text-lg lg:text-2xl my-3">FindLikeMinded.com is web application where you can search for topics you're interested in,
                             discover groups about them, join the groups and meet people with similar interests.</p>
 
                         <div class="flex items-center flex-col sm:flex-row sm:justify-between">
@@ -97,13 +97,13 @@
                             </div>
                         </div>
 
-                        <img src={{ asset('images/homepage.jpg') }} class="w-full mt-4" alt="People happy because they used mutualinterest.io">
+                        <img src={{ asset('images/homepage.jpg') }} class="w-full mt-4" alt="People happy because they used FindLikeMinded.com">
 
                         <p class="text-lg lg:text-2xl mt-3 mb-10">It's like Meetup.com. However, Meetup charges the meetup organizer
                             $29 a month.
                             Most organizers can't afford to pay this very long, so they stop paying and then
                             Meetup deletes the group. With
-                            MutualInterest.io, each user get to join two groups for free. If they want to join more
+                            FindLikeMinded.com, each user get to join two groups for free. If they want to join more
                             groups than two, then they pay $1 per group per month.  This way, the cost is split up among
                             many people, and the group, value, connections, friendships, learning and joy continue!
                         </p>
