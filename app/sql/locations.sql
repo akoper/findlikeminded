@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS locations;
 CREATE TABLE locations (
-	ID INTEGER NOT NULL AUTO_INCREMENT,
-    CITY varchar(255) NOT NULL,				
+	id INTEGER NOT NULL AUTO_INCREMENT,
+    city varchar(255) NOT NULL,
 PRIMARY KEY (ID)
-);					
-					
+);
+
 INSERT INTO locations VALUES
 (1,'Adak, AK'),
 (2,'Akiachak, AK'),
