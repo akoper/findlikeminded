@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <div class="flex mb-5">
-        <div class="flex-1  text-2xl font-bold">{{ $group->name }}</div>
+        <div class="flex-1 text-2xl font-bold">{{ $group->name }}</div>
         <div class="flex-none w-32">
             @if($inGroup)
                 <form action="/groups/leave" method="post">
@@ -35,7 +35,7 @@
         <span class="font-bold">Members:</span>
         <ul>
             @foreach($group->users as $user)
-                <li>{{ $user->name }}</li>
+                <li class="list">{{ $user->name }}</li>
             @endforeach
         </ul>
     </div>
@@ -44,7 +44,7 @@
         <span class="font-bold">Events:</span>
         <ul>
             @foreach($group->events as $event)
-                <li><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->name }}</a></li>
+                <li class="list"><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->name }}</a></li>
             @endforeach
         </ul>
     </div>

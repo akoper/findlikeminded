@@ -6,16 +6,16 @@
             <thead>
                 <tr>
                     <th class="border p-2" scope="col">Name</th>
-                    <th class="border p-2" scope="col">Description</th>
-                    <th class="border p-2 w-28" scope="col">Location</th>
+                    <th class="border p-2 hidden sm:table-cell" scope="col">Description</th>
+                    <th class="border p-2 hidden sm:table-cell w-28" scope="col">Location</th>
                 </tr>
             </thead>
             <tbody>
             @foreach($groups as $group)
                 <tr>
                     <td class="border p-2"><a class="text-blue-600 underline" href="/groups/{{ $group->id }}">{{ $group->name }}</a></td>
-                    <td class="border p-2">{{ $group->description ?? ''}}</td>
-                    <td class="border p-2">{{ $group->location->city ?? '' }}</td>
+                    <td class="border p-2 hidden sm:table-cell">{{ $group->description ?? ''}}</td>
+                    <td class="border p-2 hidden sm:table-cell">{{ $group->location->city ?? '' }}</td>
                 </tr>
             @endforeach
             </tbody>
