@@ -11,7 +11,6 @@ Route::get('/', function () {
 
 Route::get('/groups/all', [GroupController::class, 'all'])->name('groups.all'); // temp dev route
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [GroupController::class, 'index'])->name('dashboard');
 

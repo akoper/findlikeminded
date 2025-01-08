@@ -48,7 +48,7 @@
 
                     <header class="grid grid-cols-2 items-center gap-2 py-8 ">
                         <div class="flex ">
-                            <a href="{{ url('/') }}" class="inline-block text-4xl font-extrabold">FindLikeMinded.com</a>
+                            <a href="{{ url('/') }}" class="inline-block text-2xl sm:text-4xl dark:text-gray-100 font-extrabold">FindLikeMinded</a>
                         </div>
                         @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end">
