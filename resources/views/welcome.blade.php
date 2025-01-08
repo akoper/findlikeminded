@@ -48,7 +48,7 @@
 
                     <header class="grid grid-cols-2 items-center gap-2 py-8 ">
                         <div class="flex ">
-                            <a href="{{ url('/') }}" class="inline-block text-2xl sm:text-4xl dark:text-gray-100 font-extrabold">FindLikeMinded</a>
+                            <a href="{{ url('/') }}" class="inline-block text-3xl sm:text-4xl dark:text-gray-100 font-extrabold">FindLikeMinded</a>
                         </div>
                         @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end">
@@ -88,7 +88,7 @@
                                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                                         <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                        <p class="text-lg lg:text-2xl my-3">FindLikeMinded.com is web application where you can search for topics you're interested in,
+                        <p class="text-lg lg:text-2xl my-3">FindLikeMinded is web application where you can search for topics you're interested in,
                             discover groups about them, join the groups and meet people with similar interests.</p>
 
                         <div class="flex items-center flex-col sm:flex-row sm:justify-between">
