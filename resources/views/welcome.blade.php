@@ -46,12 +46,12 @@
 
                     <!-- ################ header begins here ################ -->
 
-                    <header class="grid grid-cols-2 items-center gap-2 py-8 ">
-                        <div class="flex ">
-                            <a href="{{ url('/') }}" class="inline-block text-3xl sm:text-4xl dark:text-gray-100 font-extrabold">FindLikeMinded</a>
+                    <header class="flex flex-col items-center pb-4 py-8 sm:flex-row gap-2">
+                        <div class="flex justify-center sm:justify-start">
+                            <a href="{{ url('/') }}" class="inline-block text-4xl dark:text-gray-100 font-extrabold">FindLikeMinded</a>
                         </div>
                         @if (Route::has('login'))
-                            <nav class="-mx-3 flex flex-1 justify-end">
+                            <nav class="-mx-3 flex flex-1 justify-center sm:justify-end">
                                 @auth
                                     <a
                                         href="{{ url('/dashboard') }}"
@@ -85,13 +85,13 @@
                     <main>
                             <div class="pb-12">
                                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
                                         <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                        <p class="text-lg lg:text-2xl my-3">FindLikeMinded is web application where you can search for topics you're interested in,
+                        <p class="text-lg lg:text-2xl mb-4">FindLikeMinded is web application where you can search for topics you're interested in,
                             discover groups about them, join the groups and meet people with similar interests.</p>
 
-                        <div class="flex items-center flex-col sm:flex-row sm:justify-between">
+                        <div class="flex items-center flex-col mb-3 sm:mb-4 sm:flex-row sm:justify-between">
                             <div class="flex items-center">
                                 <a href="{{ url('groups/create') }}"
                                    class="w-40 py-4 px-6 sm:px-3 sm:w-36 inline-block mb-4 sm:mb-0 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg focus:outline-none text-center">
@@ -116,9 +116,9 @@
                             </div>
                         </div>
 
-                        <img src={{ asset('images/homepage.jpg') }} class="w-full mt-4" alt="People happy because they used FindLikeMinded.com">
+                        <img src={{ asset('images/homepage.jpg') }} class="w-full" alt="People happy because they used FindLikeMinded.com">
 
-                        <p class="text-lg lg:text-2xl mt-3 mb-10">It's like Meetup.com. However, Meetup charges the meetup organizer
+                        <p class="text-lg lg:text-2xl mt-4 mb-10">It's like Meetup.com. However, Meetup charges the meetup organizer
                             $29 a month.
                             Most organizers can't afford to pay this very long, so they stop paying and then
                             Meetup deletes the group. With
