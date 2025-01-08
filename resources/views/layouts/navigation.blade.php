@@ -4,7 +4,7 @@
         <div class="flex h-72 flex-col sm:flex-row justify-center sm:h-16 md:justify-between">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center justify-center sm:align-middle">
-                    <a href="{{ route('dashboard') }}" class="inline-block text-4xl font-extrabold sm:text-2xl lg:text-4xl">FindLikeMinded</a>
+                    <a href="{{ route('dashboard') }}" class="inline-block text-4xl font-extrabold sm:text-2xl lg:text-4xl dark:text-gray-100 ">FindLikeMinded</a>
                 </div>
 
                 {{-- create group button --}}
@@ -69,7 +69,7 @@
 
             {{-- #####################    dropdown for mobile screen     ################  --}}
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
+            <div class="-me-2 flex items-center mt-2 sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -89,28 +89,23 @@
         </div>
 
         <!-- Responsive Settings Options -->
-{{--        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">--}}
-{{--            <div class="px-4">--}}
-{{--                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>--}}
-{{--                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>--}}
-{{--            </div>--}}
 
-            <div class="space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+        <div class="space-y-1">
+            <x-responsive-nav-link :href="route('profile.edit')">
+                {{ __('Profile') }}
+            </x-responsive-nav-link>
+
+            <!-- Authentication -->
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <x-responsive-nav-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Log Out') }}
                 </x-responsive-nav-link>
+            </form>
+        </div>
 
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            </div>
-{{--        </div>--}}
     </div>
 </nav>

@@ -7,7 +7,7 @@
         <input type="hidden" name="group_id" value="{{ $group_id }}" id="group_id" />
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name *</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="name">Name *</label>
             <input
                 class="required shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="name" id="name" type="text" value={{ old('name') }}>
@@ -17,8 +17,8 @@
         </div>
 
         <div class="mb-6">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Description</label>
-            <textarea class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="description">Description</label>
+            <textarea class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
             id="description" name="description" rows="7">{{ old('description') }}</textarea>
             @error('description')
             <div class="alert text-red-600 alert-danger">{{ $message }}</div>
@@ -26,7 +26,7 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Location *</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="location">Location *</label>
             <input
                 class="required shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="location" id="location" type="text" value={{ old('location') }}>
