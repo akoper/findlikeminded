@@ -10,13 +10,14 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {   // query from many-to-many relationship tables - think this works 12/29
         $groups = User::find(auth()->user()->id)->groups()->get();
 
@@ -28,7 +29,7 @@ class GroupController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('groups.create');
     }
@@ -36,7 +37,7 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGroupRequest $request)
+    public function store(StoreGroupRequest $request): RedirectResponse
     {
         $validated = $request->validated();
         $group = new Group();
@@ -50,7 +51,7 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Group $group)
+    public function show(Group $group): View
     {
         // boolean: is this user in this group?
         $inGroup = User::find(auth()->user()->id)->groups()->where('group_id', $group->id)->exists();
@@ -84,15 +85,15 @@ class GroupController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Receive a search term, query groups table and return groups that match
      */
-    public function search(Request $request)
+    public function search(Request $request): View
     {
         $name = $request->input('name');
-        $location_id = $request->input('location_id');
-
+//        $location_id = $request->input('location_id');
+        // TODO: figure out how to handle location in search vs just name
         $groups = Group::where('name', 'like', '%' . $name . '%')
-            ->where('location_id', $location_id)
+//            ->where ('location_id', $location_id)
             ->get();
 
         return view('groups.index', ['groups' => $groups, 'name' => $name]);
@@ -102,14 +103,14 @@ class GroupController extends Controller
      * this is a little temp method to help with development and testing
      * Display a listing of the resource.
      */
-    public function all()
+    public function all(): View
     {
         $groups = Group::all();
 
         return view('groups.index', compact('groups'));
     }
 
-    public function join(Request $request)
+    public function join(Request $request): RedirectResponse
     {
         $gu = new GroupUser();
         $gu->group_id = $request->input('group_id');
@@ -119,7 +120,7 @@ class GroupController extends Controller
         return redirect('/dashboard');
     }
 
-    public function leave(Request $request)
+    public function leave(Request $request): RedirectResponse
     {
         $group_id = $request->input('group_id');
         $user_id = auth()->user()->id;
