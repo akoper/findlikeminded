@@ -83,10 +83,8 @@ class DatabaseSeeder extends Seeder
         Event::factory(25)->create();
         $this->command->info('Event table seeded');
 
-
-        // create the location table ("city, ST") from the 28,000 line .sql file
-        $path = 'app/sql/locations.sql';
-        DB::unprepared(file_get_contents($path));
-        $this->command->info('location table of 28,000 cities from .sql file created and seeded!');
+        // the Location table is 'seeded' from the create_locations_migration file
+        // because --seed doesn't run in the Forge deployment script on the prod server
+        $this->command->info('Location table is populated with cities in its migration file');
     }
 }
