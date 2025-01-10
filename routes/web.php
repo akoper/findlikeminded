@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use Illuminate\Support\Facades\Route;
@@ -33,5 +34,7 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');
 
+Route::get('/locations/autocomplete', [LocationController::class, 'autocomplete'])
+    ->name('locations.autocomplete');
 
 require __DIR__.'/auth.php';

@@ -25,19 +25,19 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="location_id">Location</label>
+            <input type="hidden" name="location_id" id="location_id" value={{ old('location_id') }}>
+            <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="location">Location</label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="location_id" id="location_id" type="text" value={{ old('location_id') }}>
-            @error('location_id')
+                name="location_name" id="location_name" type="text" autocomplete="off" value={{ old('location_name') }}>
+            @error('location_name')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="flex items-center justify-between">
             <button type="submit"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="button">
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Create
             </button>
         </div>

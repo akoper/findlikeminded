@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 pt-4 sm:pt-0 sm:px-6 lg:px-8">
         <div class="flex h-72 flex-col sm:flex-row justify-center sm:h-16 md:justify-between">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center justify-center sm:align-middle">
@@ -20,9 +20,9 @@
                         <div>
                             <input type="text" name="name" id="name" placeholder="Topic"
                                    class="w-full mb-1 sm:w-20 sm:mb-0 md:w-40 lg:w-40 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
-                            <input type="text" name="location" id="location" placeholder="Location"
+                            <input type="hidden" name="location_id" id="location_id" value={{ old('location_id') }}>
+                            <input type="text" name="location_name" id="location_name" placeholder="city"
                                    class="w-full sm:w-20 md:w-40 lg:w-40 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
-
                             <button class="w-full py-2 mt-2 sm:w-16 sm:mt-0 md:px-3 lg:w-32 lg:ml-2 xl:w-40 inline-block text:px-6 text-sm bg-red-600 hover:bg-red-400 text-white font-bold rounded-lg">Search</button>
                         </div>
                     </form>

@@ -89,8 +89,11 @@ class GroupController extends Controller
     public function search(Request $request)
     {
         $name = $request->input('name');
+        $location_id = $request->input('location_id');
 
-        $groups = Group::where('name', 'like', "%{$name}%")->get();
+        $groups = Group::where('name', 'like', '%' . $name . '%')
+            ->where('location_id', $location_id)
+            ->get();
 
         return view('groups.index', ['groups' => $groups, 'name' => $name]);
     }
