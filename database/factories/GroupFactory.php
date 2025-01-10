@@ -20,7 +20,7 @@ class GroupFactory extends Factory
             'name' => fake()->sentence($nbWords = 3, $variableNbWords = true),
             'description' => fake()->paragraph($nbrSentances = 3),
             'location_id' => fake()->numberBetween(1,1000),
-            'owner_id' => fake()->numberBetween(1,10)
+            'creator_id' => fake()->numberBetween(1,10)
         ];
     }
 }

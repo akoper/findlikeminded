@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->time('end_time')->nullable();
             $table->integer('group_id');
-            $table->integer('owner_id');
+            $table->integer('creator_id');
             $table->timestamps();
         });
     }

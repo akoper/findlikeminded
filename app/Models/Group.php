@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use phpDocumentor\Reflection\Types\Integer;
 
 
 class Group extends Model
@@ -16,11 +17,12 @@ class Group extends Model
     /** @use HasFactory<GroupFactory> */
     use HasFactory;
 
-     protected $fillable = [
+    public Integer $creator_id;
+    protected $fillable = [
         'name',
         'description',
         'location_id',
-        'owner_id',
+        'creator_id',
     ];
 
     public function users(): BelongsToMany

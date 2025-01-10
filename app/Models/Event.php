@@ -22,7 +22,7 @@ class Event extends Model
         'end_date',
         'end_time',
         'group_id',
-        'owner_id'
+        'creator_id'
     ];
 
     public function group(): BelongsTo

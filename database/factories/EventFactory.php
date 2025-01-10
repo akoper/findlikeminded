@@ -26,7 +26,7 @@ class EventFactory extends Factory
             'end_date' => fake()->date(),
             'end_time' => fake()->time(),
             'group_id' => fake()->numberBetween(1,10),
-            'owner_id' => fake()->numberBetween(1,10)
+            'creator_id' => fake()->numberBetween(1,10)
         ];
     }
 }

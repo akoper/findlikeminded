@@ -36,7 +36,7 @@ class EventController extends Controller
         $validated = $request->validated();
         $event = new Event();
         $event->fill($validated);
-        $event->owner_id = auth()->user()->id;
+        $event->creator_id = auth()->user()->id;
         $event->save();
 
         return redirect('/dashboard');
