@@ -42,7 +42,8 @@ class Group extends Model
 
     public function events(): HasMany
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class)
+            ->orderBy('start_date');;
     }
 
     public function location(): BelongsTo

@@ -44,11 +44,11 @@
     </div>
 
     <div class="mb-5">
-        <span class="font-bold">End Date:</span> {{ date('D, F j, Y', strtotime($event->end_date)) ?? '' }}
+        <span class="font-bold">End Date:</span> {{ !empty($event->end_date) ? date('D, F j, Y', strtotime($event->end_date)) : '' }}
     </div>
 
     <div class="mb-5">
-        <span class="font-bold">End Time:</span> {{ date('g:ia', strtotime($event->end_time)) ?? '' }}
+        <span class="font-bold">End Time:</span> {{ !empty($event->end_time) ? date('g:ia', strtotime($event->end_time)) : '' }}
     </div>
 
 
