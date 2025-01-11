@@ -19,7 +19,10 @@ class GroupController extends Controller
      */
     public function index(): View
     {   // query from many-to-many relationship tables - think this works 12/29
-        $groups = User::find(auth()->user()->id)->groups()->get();
+        $groups = User::find(auth()->user()->id)
+            ->groups()
+            ->sortBy('start_date')
+            ->get();
 
         $user_name = Auth::user()->name;
 

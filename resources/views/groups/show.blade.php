@@ -41,10 +41,12 @@
     </div>
 
     <div class="mb-5">
-        <span class="font-bold">Events:</span>
+        <span class="font-bold">Upcoming Events:</span>
         <ul>
             @foreach($group->events as $event)
-                <li class="list"><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->name }}</a></li>
+                <li class="list"><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->name }}</a>
+                    {{ date('D, F j, Y', strtotime($event->start_date)) ?? '' }} at {{ date('g:ia', strtotime($event->start_time)) ?? '' }}
+                </li>
             @endforeach
         </ul>
     </div>

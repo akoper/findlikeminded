@@ -36,19 +36,19 @@
     </div>
 
     <div class="mb-5">
-        <span class="font-bold">Start Date:</span> {{ $event->start_date ?? '' }}
+        <span class="font-bold">Start Date:</span> {{ date('D, F j, Y', strtotime($event->start_date)) ?? '' }}
     </div>
 
     <div class="mb-5">
-        <span class="font-bold">Start Time:</span> {{ $event->start_time ?? '' }}
+        <span class="font-bold">Start Time:</span> {{ date('g:ia', strtotime($event->start_time)) ?? '' }}
     </div>
 
     <div class="mb-5">
-        <span class="font-bold">End Date:</span> {{ $event->end_date ?? '' }}
+        <span class="font-bold">End Date:</span> {{ date('D, F j, Y', strtotime($event->end_date)) ?? '' }}
     </div>
 
     <div class="mb-5">
-        <span class="font-bold">End Time:</span> {{ $event->end_time ?? '' }}
+        <span class="font-bold">End Time:</span> {{ date('g:ia', strtotime($event->end_time)) ?? '' }}
     </div>
 
 
