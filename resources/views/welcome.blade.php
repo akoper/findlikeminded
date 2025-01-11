@@ -88,8 +88,11 @@
                                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
                                         <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                        <p class="text-lg lg:text-2xl mb-4">FindLikeMinded is web application where you can search for topics you're interested in,
-                            discover groups about them, join the groups and meet people with similar interests.</p>
+                        <p class="text-lg lg:text-2xl mb-4">FindLikeMinded is web application where you can search for
+                            topics you're interested in, discover groups about them, join the groups and meet
+                            and do things with people who also like that!</p>
+                        <p class="text-lg lg:text-2xl mb-4">Birdwatching, knitting, running, first-time mothers,
+                         university alumni, hiking, Broadway plays - the possibilities are endless!</p>
 
                         <div class="flex items-center flex-col mb-3 sm:mb-4 sm:flex-row sm:justify-between">
                             <div class="flex items-center">
@@ -118,13 +121,12 @@
 
                         <img src={{ asset('images/homepage.jpg') }} class="w-full" alt="People happy because they used FindLikeMinded.com">
 
-                        <p class="text-lg lg:text-2xl mt-4 mb-10">It's like Meetup.com. However, Meetup charges the meetup organizer
-                            $29 a month.
-                            Most organizers can't afford to pay this very long, so they stop paying and then
-                            Meetup deletes the group. With
-                            FindLikeMinded.com, each user get to join two groups for free. If they want to join more
-                            groups than two, then they pay $1 per group per month.  This way, the cost is split up among
-                            many people, and the group, value, connections, friendships, learning and joy continue!
+                        <p class="text-lg lg:text-2xl mt-4 mb-10">It's like Meetup.com. However, Meetup charges the meetup
+                            organizer $29 a month. Most organizers can't afford to pay this very long, so they stop
+                            paying and then Meetup deletes the group. With
+                            FindLikeMinded.com, each user gets to join two groups for free. If they want to join more
+                            groups than that, then they get billed $1 per group per month.  This way, no one pays much,
+                            and the group, value, connections, friendships, learning and joy continue!
                         </p>
                                         </div>
                                     </div>
