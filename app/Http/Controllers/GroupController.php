@@ -15,7 +15,7 @@ use Illuminate\View\View;
 class GroupController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all the groups a user is in
      */
     public function index(): View
     {   // query from many-to-many relationship tables - think this works 12/29
@@ -27,7 +27,7 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new group.
      */
     public function create(): View
     {
@@ -35,7 +35,7 @@ class GroupController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created group in storage.
      */
     public function store(StoreGroupRequest $request): RedirectResponse
     {
@@ -45,22 +45,40 @@ class GroupController extends Controller
         $group->creator_id = auth()->user()->id;
         $group->save();
 
+        $gu = new GroupUser();
+        $gu->group_id = $group->id;
+        $gu->user_id = auth()->user()->id;
+        $gu->role = 'admin';
+        $gu->save();
+
         return redirect('/dashboard');
     }
 
     /**
-     * Display the specified resource.
+     * Display a group.
      */
     public function show(Group $group): View
     {
-        // boolean: is this user in this group?
+        // boolean: is this user in this group? for join or leave button
         $inGroup = User::find(auth()->user()->id)->groups()->where('group_id', $group->id)->exists();
 
+//        // get admins from many-to-many relationship
+//        $admins = User::find(auth()->user()->id)->groups()->get();
+//
+//        // boolean: is this user an admin of this group? to show group admin features
+//        $isAdmin = AdminGroup::where([
+//            'group_id' => $group->id,
+//            'user_id' => auth()->user()->id
+//        ])->exists();
+        // $isAdmin = AdminGroup::where('user_id', auth()->user()->id)->where('group_id', $group->id)->exists();
+        // $exists = User::where('email', 'example@email.com')->where('username', 'johndoe')->exists();
+
+//        dd($isAdmin);
         return view('groups.show', ['group' => $group, 'inGroup' => $inGroup]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing a group.
      */
     public function edit(Group $group)
     {
@@ -68,7 +86,7 @@ class GroupController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update a group in storage.
      */
     public function update(UpdateGroupRequest $request, Group $group)
     {
@@ -76,7 +94,7 @@ class GroupController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove a group from storage.
      */
     public function destroy(Group $group): RedirectResponse
     {
@@ -91,7 +109,7 @@ class GroupController extends Controller
     {
         $name = $request->input('name');
 //        $location_id = $request->input('location_id');
-        // TODO: figure out how to handle location in search vs just name
+        // TODO: figure out how to handle location in search vs just topic
         $groups = Group::where('name', 'like', '%' . $name . '%')
 //            ->where ('location_id', $location_id)
             ->get();
@@ -101,7 +119,7 @@ class GroupController extends Controller
 
     /**
      * this is a little temp method to help with development and testing
-     * Display a listing of the resource.
+     * Display a listing of all the groups.
      */
     public function all(): View
     {
@@ -115,6 +133,7 @@ class GroupController extends Controller
         $gu = new GroupUser();
         $gu->group_id = $request->input('group_id');
         $gu->user_id = auth()->user()->id;
+        $gu->role = 'member';
         $gu->save();
 
         return redirect('/dashboard');

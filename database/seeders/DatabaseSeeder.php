@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enum\UserRoleEnum;
+use App\Models\AdminGroup;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\GroupUser;
@@ -19,71 +21,68 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        User::factory()->create([
+        $user1 = User::factory()->create([
             'name' => 'Andrew Koper',
             'password' => Hash::make('asdfasdf'),
             'email' => 'andrew.koper@gmail.com',
         ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'password' => Hash::make('asdfasdf'),
-            'email' => 'test@example.com',
-        ]);
-
-        // this is test data for the group_user relationship specifically, per Mike
-        // user #3
-        User::factory()->create([
-            'name' => 'Jason JavaScript',
+        $user2 = User::factory()->create([
+            'name' => 'Test User #1',
             'password' => Hash::make('asdfasdf'),
             'email' => 'test1@example.com',
         ]);
 
-        // user #4
-        User::factory()->create([
-            'name' => 'Phil PHP',
+        $user3 = User::factory()->create([
+            'name' => 'Test User #2',
             'password' => Hash::make('asdfasdf'),
             'email' => 'test2@example.com',
         ]);
 
+        $user4 = User::factory()->create([
+            'name' => 'Test User #3',
+            'password' => Hash::make('asdfasdf'),
+            'email' => 'test@example.com',
+        ]);
+
         // group #1
-        Group::factory()->create([
-            'name' => 'JavaScript',
+        $group1 = Group::factory()->create([
+            'name' => 'Detroit JavaScript',
             'description' => 'Detroit JavaScript',
         ]);
 
         // group #2
-        Group::factory()->create([
-            'name' => 'PHP',
+        $group2 = Group::factory()->create([
+            'name' => 'Detroit PHP',
             'description' => 'Detroit PHP',
         ]);
 
-        GroupUser::factory()->create([
-            'group_id' => 1,
-            'user_id' => 3,
-        ]);
+        $user1->groups()->attach($group1, ['role'=>UserRoleEnum::ADMIN]);
+        $user1->groups()->attach($group2, ['role'=>UserRoleEnum::ADMIN]);
+        $user2->groups()->attach($group1, ['role'=>UserRoleEnum::MEMBER]);
+        $user2->groups()->attach($group2, ['role'=>UserRoleEnum::MEMBER]);
+        $user3->groups()->attach($group1, ['role'=>UserRoleEnum::MEMBER]);
+        $user3->groups()->attach($group2, ['role'=>UserRoleEnum::MEMBER]);
+        $user4->groups()->attach($group1, ['role'=>UserRoleEnum::ADMIN]);
+        $user4->groups()->attach($group2, ['role'=>UserRoleEnum::MEMBER]);
 
-        GroupUser::factory()->create([
-            'group_id' => 1,
-            'user_id' => 4,
-        ]);
-
-        GroupUser::factory()->create([
-            'group_id' => 2,
-            'user_id' => 4,
-        ]);
-        $this->command->info('Specific test user and group data seeded');
-
-        User::factory(10)->create();
+        $users = User::factory(10)->create();
         $this->command->info('User table seeded');
-        Group::factory(30)->create();
+
+        $groups = Group::factory(30)->create();
         $this->command->info('Group table seeded');
-        GroupUser::factory(50)->create();
-        $this->command->info('GroupUser table seeded');
+
+        foreach($users as $user) {
+            foreach($groups as $group) {
+                $user->groups()->attach($group, ['role'=>UserRoleEnum::MEMBER]);
+            }
+        }
+        $this->command->info('GroupUser table seeded - all remaining users added to all groups as members');
+
         Event::factory(25)->create();
         $this->command->info('Event table seeded');
 
-        // the Location table is 'seeded' from the create_locations_migration file
+        // the Location table is 'seeded'/populated with cities from the create_locations_migration
         // because --seed doesn't run in the Forge deployment script on the prod server
         $this->command->info('Location table is populated with cities in its migration file');
     }

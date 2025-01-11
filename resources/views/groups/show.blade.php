@@ -51,4 +51,34 @@
 
     <a href="{{ route('events.create', ['group_id' => $group->id]) }}" class="py-2 w-40 inline-block text-white bg-orange-600 hover:bg-orange-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm   focus:outline-none text-center">Create Event</a>
 
+    <div class="my-5">
+        <span class="font-bold">Administrator(s):</span>
+        <ul>
+            @foreach($group->admins as $admin)
+                <li class="list">{{ $admin->name }}</li>
+            @endforeach
+        </ul>
+    </div>
+
+{{--    @if($isAdmin)--}}
+    <div class="font-bold mt-8 mb-4">Group Administrator Tools</div>
+        <form action="/groups/add-admin" method="post">
+            @csrf
+            <div class="">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="location">Search for and add a user as an administrator to group (there can be many) *</label>
+                    <input type="hidden" name="group_id" id="group_id" value="{{ $group->id }}">
+                    <input type="hidden" name="user_id" id="user_id" value={{ old('user_id') }}>
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="user_name" id="user_name" type="text" autocomplete="off" value={{ old('user_name') }}>
+                    @error('user_name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <button type="submit" class="px-6 py-2 text-sm bg-blue-600 hover:bg-blue-400 text-white font-bold lg:mt-0 rounded-lg">Add Co-Admin</button>
+            </div>
+        </form>
+{{--    @endif--}}
+
 </x-app-layout>

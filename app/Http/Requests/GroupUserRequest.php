@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GroupRequest extends FormRequest
+class GroupUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,9 @@ class GroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'location_id' => 'integer|string',
-            'creator_id' => 'nullable|integer'
+            'user_id' => 'nullable|integer',
+            'group_id' => 'nullable|integer',
+            'role' => 'nullable|in:admin,member'
         ];
     }
 }

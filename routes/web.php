@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\GroupUserController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,6 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
 
     Route::resource('events', EventController::class);
+
+    Route::get('/users/autocomplete', [UserController::class, 'autocomplete'])
+        ->name('users.autocomplete');
+
+    Route::post('/groups/add-admin', [GroupUserController::class, 'addAdmin'])->name('groups.addAdmin');
 });
 
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');

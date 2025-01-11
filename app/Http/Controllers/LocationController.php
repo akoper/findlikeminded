@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Location;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class LocationController extends Controller
 {
