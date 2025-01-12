@@ -34,7 +34,7 @@ class EventController extends Controller
     /**
      * Store a newly created event in storage.
      */
-    public function store(StoreEventRequest $request): View
+    public function store(StoreEventRequest $request): RedirectResponse
     {
         $validated = $request->validated();
         $event = new Event();
@@ -47,7 +47,7 @@ class EventController extends Controller
         $eu->user_id = auth()->user()->id;
         $eu->save();
 
-        return view('events.show', ['event' => $event, 'inEvent' => true]);
+        return redirect( route('events.show', ['event' => $event]) );
     }
 
     /**

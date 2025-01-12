@@ -47,7 +47,7 @@ class GroupController extends Controller
         $gu->role = 'admin';
         $gu->save();
 
-        return redirect('/dashboard');
+        return redirect( route('group.show', ['group' => $group]) );
     }
 
     /**
