@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
 
     Route::resource('events', EventController::class);
+    Route::post('/events/join', [EventController::class, 'join'])->name('events.join');
+    Route::post('/events/leave', [EventController::class, 'leave'])->name('events.leave');
 
     Route::get('/users/autocomplete', [UserController::class, 'autocomplete'])
         ->name('users.autocomplete');

@@ -59,21 +59,8 @@ class GroupController extends Controller
      */
     public function show(Group $group): View
     {
-        // boolean: is this user in this group? for join or leave button
         $inGroup = User::find(auth()->user()->id)->groups()->where('group_id', $group->id)->exists();
 
-//        // get admins from many-to-many relationship
-//        $admins = User::find(auth()->user()->id)->groups()->get();
-//
-//        // boolean: is this user an admin of this group? to show group admin features
-//        $isAdmin = AdminGroup::where([
-//            'group_id' => $group->id,
-//            'user_id' => auth()->user()->id
-//        ])->exists();
-        // $isAdmin = AdminGroup::where('user_id', auth()->user()->id)->where('group_id', $group->id)->exists();
-        // $exists = User::where('email', 'example@email.com')->where('username', 'johndoe')->exists();
-
-//        dd($isAdmin);
         return view('groups.show', ['group' => $group, 'inGroup' => $inGroup]);
     }
 

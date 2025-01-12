@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
         $users = User::factory(10)->create();
         $this->command->info('User table seeded');
 
-        $groups = Group::factory(30)->create();
+        $groups = Group::factory(20)->create();
         $this->command->info('Group table seeded');
 
         foreach($users as $user) {
@@ -78,6 +78,43 @@ class DatabaseSeeder extends Seeder
             }
         }
         $this->command->info('GroupUser table seeded - all remaining users added to all groups as members');
+
+        // event #1
+        $event1 = Event::factory()->create([
+            'name' => 'Coffee Shop Coding Session',
+            'description' => fake()->paragraph($nbrSentances = 3),
+            'location' => 'Starbucks',
+            'address' => '75648 Michigan Ave, Dearborn, MI 48134',
+            'start_date' => fake()->date(),
+            'start_time' => fake()->time(),
+            'end_date' => fake()->date(),
+            'end_time' => fake()->time(),
+            'group_id' => 2,
+            'creator_id' => 1
+        ]);
+
+        // event #2
+        $event2 = Event::factory()->create([
+            'name' => 'Hear Bill Gates Talk',
+            'description' => 'NewLab',
+            'location' => '5600 Michigan Ave, Dearborn, MI 48134',
+            'address' => fake()->address(),
+            'start_date' => fake()->date(),
+            'start_time' => fake()->time(),
+            'end_date' => fake()->date(),
+            'end_time' => fake()->time(),
+            'group_id' => 1,
+            'creator_id' => 1
+        ]);
+
+        $user1->events()->attach($event1);
+        $user1->events()->attach($event2);
+        $user2->events()->attach($event1);
+        $user2->events()->attach($event2);
+        $user3->events()->attach($event1);
+        $user3->events()->attach($event2);
+        $user4->events()->attach($event1);
+        $user4->events()->attach($event2);
 
         Event::factory(25)->create();
         $this->command->info('Event table seeded');
