@@ -82,10 +82,10 @@ class DatabaseSeeder extends Seeder
         // event #1
         $event1 = Event::factory()->create([
             'name' => 'Coffee Shop Coding Session',
-            'description' => fake()->paragraph($nbrSentances = 3),
+            'description' => 'Bring your laptop to the Coffee Shop for a coding session.',
             'location' => 'Starbucks',
             'address' => '75648 Michigan Ave, Dearborn, MI 48134',
-            'start_date' => fake()->date(),
+            'start_date' => '2025-10-10',
             'start_time' => fake()->time(),
             'end_date' => fake()->date(),
             'end_time' => fake()->time(),
@@ -96,10 +96,24 @@ class DatabaseSeeder extends Seeder
         // event #2
         $event2 = Event::factory()->create([
             'name' => 'Hear Bill Gates Talk',
-            'description' => 'NewLab',
-            'location' => '5600 Michigan Ave, Dearborn, MI 48134',
-            'address' => fake()->address(),
-            'start_date' => fake()->date(),
+            'description' => 'Gates will talk about the future of Microsoft.  Gates will talk about the Gates Foundation.',
+            'location' => 'NewLab',
+            'address' => '5600 Michigan Ave, Detroit, MI 48134',
+            'start_date' => '2024-12-12',
+            'start_time' => fake()->time(),
+            'end_date' => fake()->date(),
+            'end_time' => fake()->time(),
+            'group_id' => 1,
+            'creator_id' => 1
+        ]);
+
+        // event #3
+        $event3 = Event::factory()->create([
+            'name' => 'Drum Circle',
+            'description' => 'Bring your bongos. Bring your snares.',
+            'location' => 'Capitol Park',
+            'address' => '1300 Woodward Ave, Detroit, MI 48134',
+            'start_date' => '2025-12-12',
             'start_time' => fake()->time(),
             'end_date' => fake()->date(),
             'end_time' => fake()->time(),
@@ -109,12 +123,15 @@ class DatabaseSeeder extends Seeder
 
         $user1->events()->attach($event1);
         $user1->events()->attach($event2);
+        $user1->events()->attach($event3);
         $user2->events()->attach($event1);
         $user2->events()->attach($event2);
+        $user2->events()->attach($event3);
         $user3->events()->attach($event1);
-        $user3->events()->attach($event2);
+        $user3->events()->attach($event3);
         $user4->events()->attach($event1);
         $user4->events()->attach($event2);
+        $user4->events()->attach($event3);
 
         Event::factory(25)->create();
         $this->command->info('Event table seeded');

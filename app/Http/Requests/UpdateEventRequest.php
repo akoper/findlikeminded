@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateEventRequest extends FormRequest
@@ -17,11 +18,12 @@ class UpdateEventRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
+            'group_id' => 'required|integer',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'location' => 'nullable|string|max:255',
@@ -29,8 +31,7 @@ class UpdateEventRequest extends FormRequest
             'start_date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_date' => 'nullable|date',
-            'end_time' => 'nullable|date_format:H:i',
-            'group_id' => 'required|integer'
+            'end_time' => 'nullable|date_format:H:i'
         ];
     }
 }

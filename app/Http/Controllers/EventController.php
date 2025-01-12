@@ -6,7 +6,6 @@ use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\EventUser;
-use App\Models\GroupUser;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -35,7 +34,7 @@ class EventController extends Controller
     /**
      * Store a newly created event in storage.
      */
-    public function store(StoreEventRequest $request): RedirectResponse
+    public function store(StoreEventRequest $request): View
     {
         $validated = $request->validated();
         $event = new Event();
@@ -43,7 +42,12 @@ class EventController extends Controller
         $event->creator_id = auth()->user()->id;
         $event->save();
 
-        return redirect('/dashboard');
+        $eu = new EventUser();
+        $eu->event_id = $event->id;
+        $eu->user_id = auth()->user()->id;
+        $eu->save();
+
+        return view('events.show', ['event' => $event, 'inEvent' => true]);
     }
 
     /**
@@ -59,17 +63,22 @@ class EventController extends Controller
     /**
      * Show the form for editing the event.
      */
-    public function edit(Event $event)
+    public function edit(Event $event): View
     {
-        //
+        return view('events.edit', ['event' => $event]);
     }
 
     /**
      * Update the event in storage.
      */
-    public function update(UpdateEventRequest $request, Event $event)
+    public function update(UpdateEventRequest $request, Event $event): View
     {
-        //
+//        Gate::authorize('update', $event);
+
+        $validated = $request->validated();
+        $event->update($validated);
+
+        return view('events.show', ['event' => $event, 'inEvent' => true]);
     }
 
     /**
@@ -77,8 +86,9 @@ class EventController extends Controller
      */
     public function destroy(Event $event): RedirectResponse
     {
+        $group = Group::find($event->group_id);
         $event->delete();
-        return back();
+        return redirect(route('groups.show', ['group' => $group->id]));;
     }
 
     /**

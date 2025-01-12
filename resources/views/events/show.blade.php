@@ -2,7 +2,7 @@
 
     <div class="flex mb-5">
         <div class="flex-1  text-2xl font-bold">{{ $event->name }}</div>
-        <div class="flex-none w-32">
+        <div class="flex-none sm:w-32">
             @if($inEvent)
                 <form action="/events/leave" method="post">
                     @csrf
@@ -36,11 +36,11 @@
     </div>
 
     <div class="mb-5">
-        <span class="font-bold">Start Date:</span> {{ date('D, F j, Y', strtotime($event->start_date)) ?? '' }}
+        <span class="font-bold">Start Date:</span> {{ date('D, F j, Y', strtotime($event->start_date)) }}
     </div>
 
     <div class="mb-5">
-        <span class="font-bold">Start Time:</span> {{ date('g:ia', strtotime($event->start_time)) ?? '' }}
+        <span class="font-bold">Start Time:</span> {{ date('g:ia', strtotime($event->start_time)) }}
     </div>
 
     <div class="mb-5">
@@ -60,5 +60,35 @@
         </ul>
     </div>
 
+    @if($event->creator_id == Auth::user()->id)
+        <div class="font-bold mt-8 mb-4">Event Organizer Tools</div>
+
+        <a href="{{ url('events/' . $event->id . '/edit') }}" class="text-blue-600 underline block mb-4">{{ __('Edit Event') }}</a>
+
+        <form method="POST" action="{{ route('events.destroy', $event) }}">
+            @csrf
+            @method('delete')
+            <button type="submit" class="text-blue-600 underline" :href="route('events.destroy', $event)"
+                    onclick="event.preventDefault(); this.closest('form').submit();">
+                {{ __('Delete Event') }}
+            </button>
+        </form>
+
+    {{-- ##### below the code to have a confirm dialog pop-up first if a user goes to delete an event #### --}}
+{{--        <a class="text-blue-600 underline block" id="opener" href="#">Delete Event</a>--}}
+
+{{--        <div id="dialog" title="Delete Event">--}}
+{{--            <form method="POST" action="{{ route('events.destroy', $event) }}">--}}
+{{--                @csrf--}}
+{{--                @method('delete')--}}
+{{--                <button type="submit" :href="route('events.destroy', $event)" onclick="event.preventDefault(); this.closest('form').submit();">--}}
+{{--                    {{ __('Delete') }}--}}
+{{--                </button>--}}
+{{--            </form>--}}
+{{--        </div>--}}
+
+    @endif
+
+    <p></p>
 
 </x-app-layout>

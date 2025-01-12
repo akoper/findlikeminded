@@ -2,7 +2,7 @@
 
     <div class="flex mb-5">
         <div class="flex-1 text-2xl font-bold">{{ $group->name }}</div>
-        <div class="flex-none w-32">
+        <div class="flex-none sm:w-32">
             @if($inGroup)
                 <form action="/groups/leave" method="post">
                     @csrf

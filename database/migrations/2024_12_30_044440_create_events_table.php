@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('address', 255);
             $table->date('start_date');
             $table->time('start_time');
-            $table->date('end_date')->nullable();
-            $table->time('end_time')->nullable();
+            $table->date('end_date')->nullable()->default(null);
+            $table->time('end_time')->nullable()->default(null);
             $table->integer('group_id');
             $table->integer('creator_id');
             $table->timestamps();

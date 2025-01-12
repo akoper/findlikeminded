@@ -123,4 +123,15 @@ $(document).ready(function() {
         }
     });
 
+
+    // #################### modal dialog launcher ##########################
+    $("#dialog").dialog({
+        autoOpen: false,
+        modal: true
+    });
+
+    $("#opener").on("click", function() {
+        $("#dialog").dialog("open");
+    });
+
 });
