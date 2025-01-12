@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\EventUser;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -42,10 +43,7 @@ class EventController extends Controller
         $event->creator_id = auth()->user()->id;
         $event->save();
 
-        $eu = new EventUser();
-        $eu->event_id = $event->id;
-        $eu->user_id = auth()->user()->id;
-        $eu->save();
+        Auth::user()->events()->attach($event);
 
         return redirect( route('events.show', ['event' => $event]) );
     }

@@ -41,11 +41,7 @@ class GroupController extends Controller
         $group->creator_id = auth()->user()->id;
         $group->save();
 
-        $gu = new GroupUser();
-        $gu->group_id = $group->id;
-        $gu->user_id = auth()->user()->id;
-        $gu->role = 'admin';
-        $gu->save();
+        Auth::user()->groups()->attach($group);
 
         return redirect( route('group.show', ['group' => $group]) );
     }

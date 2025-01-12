@@ -3,14 +3,10 @@
 namespace Database\Seeders;
 
 use App\Enum\UserRoleEnum;
-use App\Models\AdminGroup;
 use App\Models\Event;
 use App\Models\Group;
-use App\Models\GroupUser;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
