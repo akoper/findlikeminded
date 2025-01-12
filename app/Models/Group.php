@@ -39,7 +39,6 @@ class Group extends Model
             ->where('role','=', UserRoleEnum::ADMIN);
     }
 
-
     public function events(): HasMany
     {
         return $this->hasMany(Event::class)
@@ -50,5 +49,4 @@ class Group extends Model
     {
         return $this->BelongsTo(Location::class);
     }
-
 }

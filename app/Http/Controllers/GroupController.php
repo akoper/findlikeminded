@@ -15,15 +15,11 @@ use Illuminate\View\View;
 class GroupController extends Controller
 {
     /**
-     * Display all the groups a user is in
+     * Display all the groups
      */
-    public function index(): View
-    {   // query from many-to-many relationship tables - think this works 12/29
-        $groups = User::find(auth()->user()->id)->groups()->get();
+    public function index()
+    {
 
-        $user_name = Auth::user()->name;
-
-        return view('groups.index', ['groups' => $groups, 'user_name' => $user_name]);
     }
 
     /**
@@ -102,17 +98,6 @@ class GroupController extends Controller
             ->get();
 
         return view('groups.index', ['groups' => $groups, 'name' => $name]);
-    }
-
-    /**
-     * this is a little temp method to help with development and testing
-     * Display a listing of all the groups.
-     */
-    public function all(): View
-    {
-        $groups = Group::all();
-
-        return view('groups.index', compact('groups'));
     }
 
     public function join(Request $request): RedirectResponse

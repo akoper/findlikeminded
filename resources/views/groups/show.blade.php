@@ -45,7 +45,7 @@
         <ul>
             @foreach($group->events as $event)
                 <li class="list"><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->name }}</a>
-                    {{ date('D, F j, Y', strtotime($event->start_date)) ?? '' }} at {{ date('g:ia', strtotime($event->start_time)) ?? '' }}
+                    {{ $event->start_date->format('D, M j, Y') }} at {{ $event->start_time->format('g:ia') }}
                 </li>
             @endforeach
         </ul>
