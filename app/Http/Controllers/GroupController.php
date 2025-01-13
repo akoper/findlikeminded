@@ -44,7 +44,7 @@ class GroupController extends Controller
 
         Auth::user()->groups()->attach($group, ['role'=>UserRoleEnum::ADMIN]);
 
-        return redirect( route('group.show', ['group' => $group]) );
+        return redirect( route('groups.show', ['group' => $group]) );
     }
 
     /**
