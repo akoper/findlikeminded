@@ -28,6 +28,11 @@
     </div>
 
     <div class="mb-5">
+        <span class="font-bold">Group:</span>
+        <a href="{{ url('groups/' . $event->group->id) }}" class="text-blue-600 underline mb-4">{{ $event->group->name }}</a>
+    </div>
+
+    <div class="mb-5">
         <span class="font-bold">Location:</span> {{ $event->location ?? '' }}
     </div>
 

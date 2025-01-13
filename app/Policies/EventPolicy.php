@@ -38,7 +38,6 @@ class EventPolicy
     public function update(User $user, Event $event): bool
     {
         return $user->id === $event->creator_id;
-//        return true;
     }
 
     /**
@@ -54,7 +53,7 @@ class EventPolicy
      */
     public function restore(User $user, Event $event): bool
     {
-        return false;
+        return $user->id === $event->creator_id;
     }
 
     /**

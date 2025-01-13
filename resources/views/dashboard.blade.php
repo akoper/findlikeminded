@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        @if (empty($user->events))
+        @if ($user->events->count() === 0)
             <tr>
                 <td class="border p-2 italic text-center" colspan="3">no events</td>
             </tr>
@@ -38,7 +38,7 @@
         </tr>
         </thead>
         <tbody>
-        @if (empty($user->groups))
+        @if ($user->groups->count() === 0)
             <tr>
                 <td class="border p-2 italic text-center" colspan="3">no groups</td>
             </tr>

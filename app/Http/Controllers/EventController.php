@@ -6,8 +6,10 @@ use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\EventUser;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -71,7 +73,7 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event): View
     {
-//        Gate::authorize('update', $event);
+        Gate::authorize('update', $event);
 
         $validated = $request->validated();
         $event->update($validated);
@@ -84,9 +86,12 @@ class EventController extends Controller
      */
     public function destroy(Event $event): RedirectResponse
     {
+        Gate::authorize('delete', $event);
+
         $group = Group::find($event->group_id);
         $event->delete();
-        return redirect(route('groups.show', ['group' => $group->id]));;
+
+        return redirect(route('groups.show', ['group' => $group]));;
     }
 
     /**
@@ -94,10 +99,9 @@ class EventController extends Controller
      */
     public function join(Request $request): RedirectResponse
     {
-        $eu = new EventUser();
-        $eu->event_id = $request->input('event_id');
-        $eu->user_id = auth()->user()->id;
-        $eu->save();
+        $event_id = $request->input('event_id');
+
+        Auth::user()->events()->attach($event_id);
 
         return back();
     }
@@ -108,9 +112,8 @@ class EventController extends Controller
     public function leave(Request $request): RedirectResponse
     {
         $event_id = $request->input('event_id');
-        $user_id = auth()->user()->id;
 
-        $deleted = EventUser::where('event_id', $event_id)->where('user_id', $user_id)->delete();
+        Auth::User()->events()->detach($event_id);
 
         return back();
     }

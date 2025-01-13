@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\UserRoleEnum;
 use App\Models\Group;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
@@ -41,7 +42,7 @@ class GroupController extends Controller
         $group->creator_id = auth()->user()->id;
         $group->save();
 
-        Auth::user()->groups()->attach($group);
+        Auth::user()->groups()->attach($group, ['role'=>UserRoleEnum::ADMIN]);
 
         return redirect( route('group.show', ['group' => $group]) );
     }
@@ -98,11 +99,9 @@ class GroupController extends Controller
 
     public function join(Request $request): RedirectResponse
     {
-        $gu = new GroupUser();
-        $gu->group_id = $request->input('group_id');
-        $gu->user_id = auth()->user()->id;
-        $gu->role = 'member';
-        $gu->save();
+        $group_id = $request->input('group_id');
+
+        Auth::user()->groups()->attach($group_id, ['role'=>UserRoleEnum::MEMBER]);
 
         return redirect('/dashboard');
     }
@@ -110,11 +109,9 @@ class GroupController extends Controller
     public function leave(Request $request): RedirectResponse
     {
         $group_id = $request->input('group_id');
-        $user_id = auth()->user()->id;
 
-        $deleted = GroupUser::where('group_id', $group_id)->where('user_id', $user_id)->delete();
+        Auth::User()->groups()->detach($group_id);
 
         return redirect('/dashboard');
     }
-
 }
