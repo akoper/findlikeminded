@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enum\UserRoleEnum;
+use App\Http\Requests\GroupUserRequest;
 use App\Models\Group;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
-use App\Models\GroupUser;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -53,8 +53,12 @@ class GroupController extends Controller
     public function show(Group $group): View
     {
         $inGroup = User::find(auth()->user()->id)->groups()->where('group_id', $group->id)->exists();
+        $isAdmin = User::find(auth()->user()->id)->groups()
+            ->where('group_id', $group->id)
+            ->where('role', UserRoleEnum::ADMIN)
+            ->exists();
 
-        return view('groups.show', ['group' => $group, 'inGroup' => $inGroup]);
+        return view('groups.show', ['group' => $group, 'inGroup' => $inGroup, 'isAdmin' => $isAdmin]);
     }
 
     /**
@@ -97,21 +101,41 @@ class GroupController extends Controller
         return view('groups.index', ['groups' => $groups, 'name' => $name]);
     }
 
+    /**
+     * A user joins the group
+     */
     public function join(Request $request): RedirectResponse
     {
         $group_id = $request->input('group_id');
 
         Auth::user()->groups()->attach($group_id, ['role'=>UserRoleEnum::MEMBER]);
 
-        return redirect('/dashboard');
+        return redirect(route('groups.show', ['group' => $group_id]));;
     }
 
+    /**
+     * A user leaves the group
+     */
     public function leave(Request $request): RedirectResponse
     {
         $group_id = $request->input('group_id');
 
         Auth::User()->groups()->detach($group_id);
 
-        return redirect('/dashboard');
+        return redirect(route('groups.show', ['group' => $group_id]));;
+    }
+
+    /**
+     * Add a user as an admin to a group
+     */
+    public function addAdmin(GroupUserRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+        $group_id = $validated['group_id'];
+        $user_id = $validated['user_id'];
+
+        User::find($user_id)->groups()->syncWithoutDetaching([$group_id => ['role'=>UserRoleEnum::ADMIN]]);
+
+        return back();
     }
 }

@@ -24,21 +24,22 @@ Route::middleware('auth')->group(function () {
     Route::resource('groups', GroupController::class);
     Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
     Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
+    Route::post('/groups/add-admin', [GroupController::class, 'addAdmin'])->name('groups.addAdmin');
 
     Route::resource('events', EventController::class);
     Route::post('/events/join', [EventController::class, 'join'])->name('events.join');
     Route::post('/events/leave', [EventController::class, 'leave'])->name('events.leave');
-    Route::post('/groups/add-admin', [GroupUserController::class, 'addAdmin'])->name('groups.addAdmin');
 
     Route::get('/users/autocomplete', [UserController::class, 'autocomplete'])
         ->name('users.autocomplete');
 
 });
-// this search feature is on the welcome page so guests can search for an interest,
-// find matching groups and join the application - this is why it's not behind auth middleware
+
+// this search groups feature is on the welcome page so that new visitor can search for an interest,
+// find a matching group and join the application - this is why it's not behind auth middleware
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');
 
-// also for search topics feature
+// also for search group feature
 Route::get('/locations/autocomplete', [LocationController::class, 'autocomplete'])
     ->name('locations.autocomplete');
 

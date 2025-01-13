@@ -62,7 +62,7 @@
         </ul>
     </div>
 
-{{--    @if($isAdmin)--}}
+    @if($isAdmin == true)
     <div class="font-bold mt-8 mb-4">Group Administrator Tools</div>
         <form action="/groups/add-admin" method="post">
             @csrf
@@ -81,6 +81,6 @@
                 <button type="submit" class="px-6 py-2 text-sm bg-blue-600 hover:bg-blue-400 text-white font-bold lg:mt-0 rounded-lg">Add Co-Admin</button>
             </div>
         </form>
-{{--    @endif--}}
+    @endif
 
 </x-app-layout>
