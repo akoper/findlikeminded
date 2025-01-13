@@ -44,7 +44,7 @@ class EventController extends Controller
         $event->creator_id = auth()->user()->id;
         $event->save();
 
-        Auth::user()->events()->attach($event); // add to the event_user table
+        Auth::user()->events()->attach($event);
 
         return redirect( route('events.show', ['event' => $event]) );
     }

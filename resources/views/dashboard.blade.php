@@ -2,12 +2,13 @@
 
     <p class="mb-5 text-2xl font-bold">{{ Auth::user()->name }}'s Dashboard</p>
 
-    <p class="mb-4 mt-10 text-xl font-bold">Upcoming Events</p>
+    <p class="mb-4 mt-10 text-xl font-bold">Your Upcoming Events</p>
     <table class="border table-auto border-collapse min-w-full">
         <thead>
         <tr>
             <th class="border p-2" scope="col">Name</th>
             <th class="border p-2 hidden sm:table-cell" scope="col">Date</th>
+            <th class="border p-2 hidden sm:table-cell" scope="col">Group</th>
             <th class="border p-2 hidden sm:table-cell" scope="col">Location</th>
         </tr>
         </thead>
@@ -21,6 +22,7 @@
                 <tr>
                     <td class="border p-2"><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->name }}</a></td>
                     <td class="border p-2 hidden sm:table-cell">{{ $event->start_date->format('D, M j, Y') ?? ''}}</td>
+                    <td class="border p-2 hidden sm:table-cell""><a class="text-blue-600 underline" href="/groups/{{ $event->group->id }}">{{ $event->group->name }}</a></td>
                     <td class="border p-2 hidden sm:table-cell">{{ $event->location ?? '' }}</td>
                 </tr>
             @endforeach
@@ -28,7 +30,7 @@
         </tbody>
     </table>
 
-    <p class="mb-4 mt-10 text-xl font-bold">Groups</p>
+    <p class="mb-4 mt-10 text-xl font-bold">Your Groups</p>
     <table class="border table-auto border-collapse min-w-full">
         <thead>
         <tr>
