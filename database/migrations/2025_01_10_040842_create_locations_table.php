@@ -23,8 +23,6 @@ return new class extends Migration {
         });
 
         $output = new ConsoleOutput();
-        $output->writeln(' '); // new line for console output
-        $output->writeln('Location table created in migration') ;
 
         DB::table('locations')->insert(
             array(

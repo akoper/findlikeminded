@@ -89,8 +89,12 @@ class GroupController extends Controller
      */
     public function destroy(Group $group): RedirectResponse
     {
+        // cascading delete for groups and related models/records
+        $group->events()->delete();
+        $group->admins()->sync([]); //many-to-many relationship
         $group->delete();
-        return back();
+
+        return redirect(route('dashboard'));
     }
 
     /**

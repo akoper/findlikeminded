@@ -22,7 +22,7 @@
                 <tr>
                     <td class="border p-2"><a class="text-blue-600 underline" href="/events/{{ $event->id }}">{{ $event->name }}</a></td>
                     <td class="border p-2 hidden sm:table-cell">{{ $event->start_date->format('D, M j, Y') ?? ''}}</td>
-                    <td class="border p-2 hidden sm:table-cell""><a class="text-blue-600 underline" href="/groups/{{ $event->group->id }}">{{ $event->group->name }}</a></td>
+                    <td class="border p-2 hidden sm:table-cell"><a class="text-blue-600 underline" href="/groups/{{ $event->group->id }}">{{ $event->group->name }}</a></td>
                     <td class="border p-2 hidden sm:table-cell">{{ $event->location ?? '' }}</td>
                 </tr>
             @endforeach

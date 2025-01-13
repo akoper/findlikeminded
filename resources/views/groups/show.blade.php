@@ -65,12 +65,12 @@
     @if($isAdmin == true)
     <div class="font-bold mt-8 mb-4">Group Administrator Tools</div>
 
-        <a href="{{ route('groups.edit', $group) }}" class="py-2 mb-4 w-36 inline-block text-white bg-yellow-500 hover:bg-yellow-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Edit Event</a>
+        <a href="{{ route('groups.edit', $group) }}" class="py-2 mt-4 mb-8 w-36 inline-block text-white bg-yellow-500 hover:bg-yellow-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Edit Group</a>
 
         <form action="/groups/add-admin" method="post">
             @csrf
             <div class="">
-                <div class="mb-4">
+                <div class="mb-2">
                     <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="location">Search for and add a user as an administrator to group (there can be many) *</label>
                     <input type="hidden" name="group_id" id="group_id" value="{{ $group->id }}">
                     <input type="hidden" name="user_id" id="user_id" value={{ old('user_id') }}>
@@ -81,8 +81,17 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <button type="submit" class="px-6 py-2 text-sm bg-blue-600 hover:bg-blue-400 text-white font-bold lg:mt-0 rounded-lg">Add Co-Admin</button>
+                <button type="submit" class="px-6 py-2 lg:mt-0 text-sm bg-blue-600 hover:bg-blue-400 text-white font-bold rounded-lg">Add Co-Admin</button>
             </div>
+        </form>
+
+        <form method="POST" action="{{ route('groups.destroy', $group) }}">
+            @csrf
+            @method('delete')
+            <button type="submit" class="text-blue-600 underline my-8" :href="route('groups.destroy', $event)"
+                    onclick="event.preventDefault(); this.closest('form').submit();">
+                {{ __('Delete Group') }}
+            </button>
         </form>
     @endif
 

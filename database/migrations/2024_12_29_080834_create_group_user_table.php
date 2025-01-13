@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('group_id');
             $table->integer('user_id');
             $table->string('role');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

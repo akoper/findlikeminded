@@ -23,6 +23,7 @@ return new class extends Migration
             $table->time('end_time')->nullable()->default(null);
             $table->integer('group_id');
             $table->integer('creator_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

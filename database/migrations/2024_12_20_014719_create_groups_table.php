@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('location_id');
             $table->integer('creator_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

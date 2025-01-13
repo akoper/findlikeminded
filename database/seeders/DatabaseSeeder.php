@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
                 $user->groups()->attach($group, ['role'=>UserRoleEnum::MEMBER]);
             }
         }
-        $this->command->info('GroupUser table seeded - all remaining users added to all groups as members');
+        $this->command->info('GroupUser table seeded');
 
         // event #1
         $event1 = Event::factory()->create([
@@ -128,6 +128,8 @@ class DatabaseSeeder extends Seeder
         $user4->events()->attach($event1);
         $user4->events()->attach($event2);
         $user4->events()->attach($event3);
+
+        $this->command->info('EventUser table seeded');
 
         Event::factory(25)->create();
         $this->command->info('Event table seeded');
