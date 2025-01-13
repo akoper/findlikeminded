@@ -64,6 +64,9 @@
 
     @if($isAdmin == true)
     <div class="font-bold mt-8 mb-4">Group Administrator Tools</div>
+
+        <a href="{{ route('groups.edit', $group) }}" class="py-2 mb-4 w-36 inline-block text-white bg-yellow-500 hover:bg-yellow-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Edit Event</a>
+
         <form action="/groups/add-admin" method="post">
             @csrf
             <div class="">

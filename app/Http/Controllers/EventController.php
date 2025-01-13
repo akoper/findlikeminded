@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
-use App\Models\EventUser;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +16,7 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
     /**
-     * Display a listing of the event.
+     * Display a listing of all events.
      */
     public function index()
     {
@@ -45,7 +44,7 @@ class EventController extends Controller
         $event->creator_id = auth()->user()->id;
         $event->save();
 
-        Auth::user()->events()->attach($event);
+        Auth::user()->events()->attach($event); // add to the event_user table
 
         return redirect( route('events.show', ['event' => $event]) );
     }
@@ -65,6 +64,8 @@ class EventController extends Controller
      */
     public function edit(Event $event): View
     {
+        Gate::authorize('edit', $event);
+
         return view('events.edit', ['event' => $event]);
     }
 
@@ -78,7 +79,7 @@ class EventController extends Controller
         $validated = $request->validated();
         $event->update($validated);
 
-        return view('events.show', ['event' => $event, 'inEvent' => true]);
+        return view('events.show', ['event' => $event]);
     }
 
     /**

@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class GroupController extends Controller
@@ -64,18 +65,24 @@ class GroupController extends Controller
     /**
      * Show the form for editing a group.
      */
-    public function edit(Group $group)
+    public function edit(Group $group): View
     {
-        //
+//        Gate::authorize('edit', $group);
+
+        return view('groups.edit', ['group' => $group]);
     }
 
     /**
      * Update a group in storage.
      */
-    public function update(UpdateGroupRequest $request, Group $group)
+    public function update(UpdateGroupRequest $request, Group $group): RedirectResponse
     {
-        //
-    }
+//        Gate::authorize('update', $group);
+
+        $validated = $request->validated();
+        $group->update($validated);
+
+        return redirect(route('groups.show', ['group' => $group]));;}
 
     /**
      * Remove a group from storage.
@@ -92,11 +99,15 @@ class GroupController extends Controller
     public function search(Request $request): View
     {
         $name = $request->input('name');
-//        $location_id = $request->input('location_id');
+        // $location_id = $request->input('location_id');
         // TODO: figure out how to handle location in search vs just topic
-        $groups = Group::where('name', 'like', '%' . $name . '%')
-//            ->where ('location_id', $location_id)
-            ->get();
+
+        if($name === null) {
+            $groups = null;
+        } else {
+            $groups = Group::where('name', 'like', '%' . $name . '%')->get();
+            // ->where ('location_id', $location_id)
+        }
 
         return view('groups.index', ['groups' => $groups, 'name' => $name]);
     }

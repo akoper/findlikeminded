@@ -32,6 +32,15 @@ class EventPolicy
         return false;
     }
 
+
+    /**
+     * Determine whether the user can see the form to edit event
+     */
+    public function edit(User $user, Event $event): bool
+    {
+        return $user->id === $event->creator_id;
+    }
+
     /**
      * Determine whether the user can update the model.
      */

@@ -7,14 +7,14 @@
                     <a href="{{ route('dashboard') }}" class="inline-block text-4xl font-extrabold sm:text-2xl lg:text-4xl dark:text-gray-100 ">FindLikeMinded</a>
                 </div>
 
-                {{-- create group button --}}
+            {{-- #####################    create group button     ################  --}}
                 <div class="shrink-0 flex items-center">
                     <a href="{{ url('/groups/create') }}"
                        class="w-full py-2 mt-3 sm:w-32 sm:mt-0 sm:mx-2 md:mx-5 md:w-36 md:px-6 lg:w-40 xl:mx-14 xl:w-40 inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Create Group</a>
                 </div>
 
-                {{--  search groups form--}}
-                <div class="text-center sm:flex items-center w-full mt-3 sm:mt-0">
+            {{-- #####################    search groups form     ################  --}}
+            <div class="text-center sm:flex items-center w-full mt-3 sm:mt-0">
                     <form action="/groups/search" method="post">
                         @csrf
                         <div>

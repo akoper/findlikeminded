@@ -33,11 +33,19 @@ class GroupPolicy
     }
 
     /**
+     * Determine whether the user can see the form to edit group
+     */
+    public function edit(User $user, Group $group): bool
+    {
+        return $user->id === $group->admins->id;
+    }
+
+    /**
      * Determine whether the user can update the model.
      */
     public function update(User $user, Group $group): bool
     {
-        return false;
+        return $user->id === $group->admins()->id;
     }
 
     /**
@@ -45,7 +53,7 @@ class GroupPolicy
      */
     public function delete(User $user, Group $group): bool
     {
-        return false;
+        return $user->id === $group->admins->id;
     }
 
     /**
@@ -53,7 +61,7 @@ class GroupPolicy
      */
     public function restore(User $user, Group $group): bool
     {
-        return false;
+        return $user->id === $group->admins->id;
     }
 
     /**
@@ -61,6 +69,6 @@ class GroupPolicy
      */
     public function forceDelete(User $user, Group $group): bool
     {
-        return false;
+        return $user->id === $group->admins->id;
     }
 }

@@ -1,6 +1,6 @@
 <x-app-layout>
 
-        <p class="mb-5 text-2xl font-bold">Search Results for {{ $name }}</p>
+        <p class="mb-5 text-2xl font-bold">Search Results for {{ $name ?? "no search topic" }}</p>
 
         <table class="border table-auto border-collapse min-w-full">
             <thead>
@@ -11,11 +11,9 @@
                 </tr>
             </thead>
             <tbody>
-            @if (empty($groups))
+            @if ($groups == null || $groups->count() == 0)
                 <tr>
-                    <td class="border p-2"><i>no groups</i></td>
-                    <td class="border p-2 hidden sm:table-cell"></td>
-                    <td class="border p-2 hidden sm:table-cell"></td>
+                    <td class="border p-2 italic text-center" colspan="3"> no groups found</td>
                 </tr>
             @else
                 @foreach($groups as $group)
