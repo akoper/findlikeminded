@@ -35,12 +35,16 @@ Route::middleware('auth')->group(function () {
 
 });
 
-// this search groups feature is on the welcome page so that new visitor can search for an interest,
-// find a matching group and join the application - this is why it's not behind auth middleware
+// on welcome page for visitors so they search for a topic  interest, find a group and sign up
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');
 
 // also for search group feature
 Route::get('/locations/autocomplete', [LocationController::class, 'autocomplete'])
     ->name('locations.autocomplete');
 
+Route::get('/google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
+
+Route::get('/privacy-policy', function () { return view('privacy-policy'); });
+Route::get('/data-deletion', function () { return view('data-deletion');} );
 require __DIR__.'/auth.php';
