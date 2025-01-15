@@ -15,7 +15,7 @@
         <tbody>
         @if ($user->events->count() === 0)
             <tr>
-                <td class="border p-2 italic text-center" colspan="3">no events</td>
+                <td class="border p-2 italic text-center" colspan="4">no events</td>
             </tr>
         @else
             @foreach($user->events as $event)

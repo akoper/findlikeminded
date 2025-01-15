@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GroupUserController;
 use App\Http\Controllers\LocationController;
@@ -44,6 +45,9 @@ Route::get('/locations/autocomplete', [LocationController::class, 'autocomplete'
 
 Route::get('/google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('/google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
+
+Route::get('login/facebook', [FacebookController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('login/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
 
 Route::get('/privacy-policy', function () { return view('privacy-policy'); });
 Route::get('/data-deletion', function () { return view('data-deletion');} );
