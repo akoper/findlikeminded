@@ -6,12 +6,11 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-// #################### autocomplete/typeahead for locations ##########################
-// jQuery autocomplete to get location name and id from location table with location form input
 $(document).ready(function() {
 
-    // this looks like duplicate code but on the create group page, the location input autocomplete in the header
-    // was interfering with the location input autocomplete in the form - same target dom elements
+    // #################### autocomplete/typeahead for locations ##########################
+    // jQuery autocomplete to get location name and id from location table in search groups on
+    // welcome page and create group page
     const $locationNameInput = $("#location_name");
 
     $locationNameInput.autocomplete({
@@ -46,10 +45,13 @@ $(document).ready(function() {
     });
 
 
-    // #################### autocomplete/typeahead for locations in header ##########################
-    const $locationNameInputHeader = $("#location_name_header");
+    // #############   autocomplete/typeahead for locations in top navigation/header   #################
+    // this looks like duplicate code, but on the group create page, the location input
+    // autocomplete in the search in the top navigation was clobbering the location input
+    // autocomplete in the create groups form in the page body - they had the same target DOM id's
+    const $locationNameInputNavigation = $("#location_name_navigation");
 
-    $locationNameInputHeader.autocomplete({
+    $locationNameInputNavigation.autocomplete({
         source: function (request, response) {
             $.ajax({
                 data: {
@@ -66,28 +68,19 @@ $(document).ready(function() {
         minLength: 2,
         // when user selects city from autocomplete, set id to hidden location_id field and name to location_name field
         select: function( event, ui ) {
-            $('#location_id_header').val(ui.item.value);
-            $('#location_name_header').val(ui.item.label);
+            $('#location_id_navigation').val(ui.item.value);
+            $('#location_name_navigation').val(ui.item.label);
             return false;
         }
     });
 
     // if the location_name field has a city's name, but the user deletes the location/city name
     // delete that location's id from the hidden location_id field
-    $locationNameInputHeader.blur(function () {
+    $locationNameInputNavigation.blur(function () {
         if ($(this).val().length === 0) {
-            $("#location_id_header").val("");
+            $("#location_id_navigation").val("");
         }
     });
-
-    // if the location_name field has a city's name, but the user deletes the location/city name
-    // delete that location's id from the hidden location_id field
-    $locationNameInput.blur(function () {
-        if ($(this).val().length === 0) {
-            $("#location_id").val("");
-        }
-    });
-
 
     // #################### autocomplete/typeahead for users ##########################
     const $userNameInput = $("#user_name");
@@ -124,7 +117,8 @@ $(document).ready(function() {
     });
 
 
-    // #################### modal dialog launcher ##########################
+    // ###########  modal/dialog launcher for 'are you sure you want to delete group'  #############
+    // TODO - started but not implemented 1/11/2025
     $("#dialog").dialog({
         autoOpen: false,
         modal: true

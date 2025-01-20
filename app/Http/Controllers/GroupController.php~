@@ -104,7 +104,6 @@ class GroupController extends Controller
     {
         $name = $request->get('name');
 
-        // location search input on top nav and welcome page have different id's bc jQuery autocomplete
         if($request->get('location_id')) {
             $location_id = $request->get('location_id');
             $location_name = $request->get('location_name');
@@ -113,7 +112,6 @@ class GroupController extends Controller
             $location_name = $request->get('location_name_navigation');
         }
 
-        // query builder if search by topic and/or location
         $groupQuery = Group::query();
 
         $groupQuery->when($name, function($query) use ($name) {
@@ -126,7 +124,6 @@ class GroupController extends Controller
 
         $groups = $groupQuery->get();
 
-        // return page title if search by topic and/or location
         if(($name) && (!$location_name)) {
             $search_terms = $name;
         } elseif ((!$name) && ($location_name)) {

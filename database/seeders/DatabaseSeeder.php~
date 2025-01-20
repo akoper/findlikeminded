@@ -46,14 +46,14 @@ class DatabaseSeeder extends Seeder
         $group1 = Group::factory()->create([
             'name' => 'Detroit JavaScript',
             'description' => 'Detroit JavaScript',
-            'location_id' => Location::query()->where('city', 'Detroit, MI')->first()->id,
+            'location_id' => Location::query()->where('city', 'Detroit, MI')->first()->id,s
         ]);
 
         // group #2
         $group2 = Group::factory()->create([
             'name' => 'Detroit PHP',
             'description' => 'Detroit PHP',
-            'location_id' => Location::query()->where('city', 'Detroit, MI')->first()->id,
+            'location_id' => Location::query()->where('city', 'Detroit, MI')->first()->id,s
         ]);
 
         $user1->groups()->attach($group1, ['role'=>UserRoleEnum::ADMIN]);
