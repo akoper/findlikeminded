@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
@@ -16,6 +17,8 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     use SoftDeletes;
+
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
