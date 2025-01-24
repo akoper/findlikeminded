@@ -2,18 +2,16 @@
 
 use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\GroupUserController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/groups/all', [GroupController::class, 'all'])->name('groups.all'); // temp dev route
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
@@ -33,6 +31,24 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/users/autocomplete', [UserController::class, 'autocomplete'])
         ->name('users.autocomplete');
+
+    // wouldn't normally hard code product id and price id here, but its so simple, will do
+    Route::get('/subscribe', function (Request $request) {
+        return $request->user()
+            ->newSubscription('prod_Rdyo9nUDWFaX3h', 'price_1Qkgr4Az8wYmHt8vp5njDBoF')
+            ->checkout([
+                'success_url' => route('subscribe-success'),
+                'cancel_url' => route('subscribe-cancel'),
+            ]);
+    })->name('subscribe');
+
+    Route::get('/subscribe/subscribe-success', function () {
+        return view('subscribe.subscribe-success');
+    })->name('subscribe-success');
+
+    Route::get('/subscribe/subscribe-cancel', function () {
+        return view('subscribe.subscribe-cancel');
+    })->name('subscribe-cancel');
 });
 
 // on welcome page for visitors so they search for a topic  interest, find a group and sign up
