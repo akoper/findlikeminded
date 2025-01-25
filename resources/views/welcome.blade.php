@@ -148,6 +148,12 @@
                             groups than that, then they get billed $1 per group per month.  This way, no one pays much,
                             and the group, value, connections, friendships, learning and joy continue!
                         </p>
+
+                        <p class="text-lg lg:text-2xl mt-4 mb-10">
+                            You can add an icon for this "app" to your smartphone's home screen.
+                            On Android or iPhone, open this web application in the Chrome or Safari browser,
+                            click on the three dots in the upper right corner and select "Add to home screen."
+                        </p>
                                         </div>
                                     </div>
                                 </div>

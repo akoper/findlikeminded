@@ -2,8 +2,6 @@
 
     <p class="mb-5 text-2xl font-bold">{{ Auth::user()->name }}'s Dashboard</p>
 
-    <a href="{{ route('subscribe') }}" class="py-2 mt-4 mb-8 w-36 inline-block text-white bg-yellow-500 hover:bg-yellow-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Subscribe</a>
-
     <p class="mb-4 mt-10 text-xl font-bold">Your Upcoming Events</p>
     <table class="border table-auto border-collapse min-w-full">
         <thead>

@@ -20,11 +20,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('groups', GroupController::class);
-    Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
-    Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
-    Route::post('/groups/add-admin', [GroupController::class, 'addAdmin'])->name('groups.addAdmin');
-
     Route::resource('events', EventController::class);
     Route::post('/events/join', [EventController::class, 'join'])->name('events.join');
     Route::post('/events/leave', [EventController::class, 'leave'])->name('events.leave');
@@ -35,12 +30,20 @@ Route::middleware('auth')->group(function () {
     // wouldn't normally hard code product id and price id here, but its so simple, will do
     Route::get('/subscribe', function (Request $request) {
         return $request->user()
-            ->newSubscription('prod_Rdyo9nUDWFaX3h', 'price_1Qkgr4Az8wYmHt8vp5njDBoF')
+//            ->newSubscription('prod_ReJ2OmMZtorOIm', 'price_1Ql0RUAz8wYmHt8vDO91Eg6T') // prod subscription
+            ->newSubscription('prod_Rdyo9nUDWFaX3h', 'price_1Qkgr4Az8wYmHt8vp5njDBoF') // test subscription
             ->checkout([
                 'success_url' => route('subscribe-success'),
                 'cancel_url' => route('subscribe-cancel'),
             ]);
+//            ])->create($request->paymentMethodId); // guessing the Stripe webhook sends the created subscriber back
     })->name('subscribe');
+
+    Route::get('test', function (Request $request) {
+        $request->user()->newSubscription('default', 'price_1Qkgr4Az8wYmHt8vp5njDBoF')->createAndSendInvoice();
+        dd('done');
+        dd($request->user()->paymentMethods());
+    })->name('test');
 
     Route::get('/subscribe/subscribe-success', function () {
         return view('subscribe.subscribe-success');
@@ -49,7 +52,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/subscribe/subscribe-cancel', function () {
         return view('subscribe.subscribe-cancel');
     })->name('subscribe-cancel');
+
+    // subscribe middleware is applied to group create and join methods in controller
+    Route::resource('groups', GroupController::class);
+    Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
+    Route::post('/groups/add-admin', [GroupController::class, 'addAdmin'])->name('groups.addAdmin');
+    Route::get('/groups/join/{id}', [GroupController::class, 'join'])->name('groups.join');
+//    Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
 });
+
+//Route::post('/stripe/webhook', 'Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook')->name('cashier.webhook');
 
 // on welcome page for visitors so they search for a topic  interest, find a group and sign up
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');

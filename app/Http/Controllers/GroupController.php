@@ -13,9 +13,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class GroupController extends Controller
+class GroupController extends Controller implements HasMiddleware
 {
+    /**
+     * Apply subscribe middleware to create and join methods
+     */
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('subscribe', only: ['create', 'join']),
+        ];
+    }
+
     /**
      * Display all the groups
      */
