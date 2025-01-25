@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,21 +30,25 @@ Route::middleware('auth')->group(function () {
 
     // wouldn't normally hard code product id and price id here, but its so simple, will do
     Route::get('/subscribe', function (Request $request) {
+
+        // TODO: change for prod - move subscription product values to db table?
+        if('local' == App::environment()) {
+            $product = 'prod_Rdyo9nUDWFaX3h';
+            $price = 'price_1Qkgr4Az8wYmHt8vp5njDBoF';
+        } else {
+            $product = 'prod_ReJ2OmMZtorOIm';
+            $price = 'price_1Ql0RUAz8wYmHt8vDO91Eg6T';
+        }
+
         return $request->user()
-//            ->newSubscription('prod_ReJ2OmMZtorOIm', 'price_1Ql0RUAz8wYmHt8vDO91Eg6T') // prod subscription
-            ->newSubscription('prod_Rdyo9nUDWFaX3h', 'price_1Qkgr4Az8wYmHt8vp5njDBoF') // test subscription
+            ->newSubscription($product, $price)
             ->checkout([
                 'success_url' => route('subscribe-success'),
                 'cancel_url' => route('subscribe-cancel'),
             ]);
-//            ])->create($request->paymentMethodId); // guessing the Stripe webhook sends the created subscriber back
+        // guessing Stripe webhook sends back to app db that user is now a subscriber but can't test with local url
+        // ])->create($request->paymentMethodId);
     })->name('subscribe');
-
-    Route::get('test', function (Request $request) {
-        $request->user()->newSubscription('default', 'price_1Qkgr4Az8wYmHt8vp5njDBoF')->createAndSendInvoice();
-        dd('done');
-        dd($request->user()->paymentMethods());
-    })->name('test');
 
     Route::get('/subscribe/subscribe-success', function () {
         return view('subscribe.subscribe-success');
@@ -57,8 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('groups', GroupController::class);
     Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
     Route::post('/groups/add-admin', [GroupController::class, 'addAdmin'])->name('groups.addAdmin');
-    Route::get('/groups/join/{id}', [GroupController::class, 'join'])->name('groups.join');
-//    Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
+    Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
 });
 
 //Route::post('/stripe/webhook', 'Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook')->name('cashier.webhook');
