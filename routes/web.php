@@ -8,7 +8,6 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleLoginController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,17 +28,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/autocomplete', [UserController::class, 'autocomplete'])
         ->name('users.autocomplete');
 
-    // wouldn't normally hard code product id and price id here, but its so simple, will do
     Route::get('/subscribe', function (Request $request) {
-
         return $request->user()
             ->newSubscription(env('PRODUCT_NAME'), env('PROD_ID'))
             ->checkout([
                 'success_url' => route('subscribe-success'),
                 'cancel_url' => route('subscribe-cancel'),
             ]);
-        // guessing Stripe webhook sends back to app db that user is now a subscriber but can't test with local url
-        // ])->create($request->paymentMethodId);
     })->name('subscribe');
 
     Route::get('/subscribe/subscribe-success', function () {
@@ -50,7 +45,7 @@ Route::middleware('auth')->group(function () {
         return view('subscribe.subscribe-cancel');
     })->name('subscribe-cancel');
 
-    // subscribe middleware is applied to group create and join methods in controller
+    // subscribe middleware is applied to Group create and join methods in GroupController
     Route::resource('groups', GroupController::class);
     Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
     Route::post('/groups/add-admin', [GroupController::class, 'addAdmin'])->name('groups.addAdmin');
