@@ -6,6 +6,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GoogleLoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -31,17 +32,8 @@ Route::middleware('auth')->group(function () {
     // wouldn't normally hard code product id and price id here, but its so simple, will do
     Route::get('/subscribe', function (Request $request) {
 
-        // TODO: change for prod - move subscription product values to db table?
-        if('local' == App::environment()) {
-            $product = 'prod_Rdyo9nUDWFaX3h';
-            $price = 'price_1Qkgr4Az8wYmHt8vp5njDBoF';
-        } else {
-            $product = 'prod_ReJ2OmMZtorOIm';
-            $price = 'price_1Ql0RUAz8wYmHt8vDO91Eg6T';
-        }
-
         return $request->user()
-            ->newSubscription($product, $price)
+            ->newSubscription(env('PRODUCT_NAME'), env('PROD_ID'))
             ->checkout([
                 'success_url' => route('subscribe-success'),
                 'cancel_url' => route('subscribe-cancel'),
@@ -65,8 +57,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
 });
 
-//Route::post('/stripe/webhook', 'Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook')->name('cashier.webhook');
-
 // on welcome page for visitors so they search for a topic  interest, find a group and sign up
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');
 
@@ -74,14 +64,15 @@ Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.
 Route::get('/locations/autocomplete', [LocationController::class, 'autocomplete'])
     ->name('locations.autocomplete');
 
-Route::get('/google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
-Route::get('/google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
+Route::get('/google/redirect', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
 
 Route::get('login/facebook', [FacebookController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
 
 // required by Facebook for login with Facebook
-Route::get('/privacy-policy', function () { return view('privacy-policy'); });
-Route::get('/data-deletion', function () { return view('data-deletion');} );
+Route::get('/privacy-policy', function () { return view('privacy-policy'); })->name('privacy-policy');
+Route::get('/data-deletion', function () { return view('data-deletion');} )->name('data-deletion');
+Route::get('/contact-us', function () { return view('contact-us');} )->name('contact-us');
 
 require __DIR__.'/auth.php';

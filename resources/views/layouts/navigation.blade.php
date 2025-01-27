@@ -69,6 +69,14 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="url(env('STRIPE_CUSTOMER_BILLING_PORTAL_URL'))">
+                            {{ __('Billing (in Stripe)') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('contact-us')">
+                            {{ __('Contact Us') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
