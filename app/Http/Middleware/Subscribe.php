@@ -19,7 +19,7 @@ class Subscribe
     {
         $noOfGroups = GroupUser::where('user_id', auth()->user()->id)->count();
 
-        if ($noOfGroups >= 2 && !$request->user()?->subscribed()) {
+        if ($noOfGroups >= 2 && !$request->user()?->subscribed(env('PRODUCT_NAME'))) {
             return redirect('/subscribe');
         }
 

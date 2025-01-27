@@ -29,9 +29,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'facebook_id',
-//        'stripe_plan',
-//        'stripe_active'
+        'facebook_id'
     ];
 
     /**
