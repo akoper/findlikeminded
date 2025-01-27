@@ -19,7 +19,10 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 class GroupController extends Controller implements HasMiddleware
 {
     /**
-     * Apply subscribe middleware to create and join methods
+     * Apply subscribe middleware to create and join methods.  Checks
+     * to see if user is in 2 groups - the free amount - or a paying
+     * subscriber and redirects to Stripe pay/subscribe page if these
+     * conditions aren't met
      */
     public static function middleware(): array
     {
@@ -79,7 +82,7 @@ class GroupController extends Controller implements HasMiddleware
      */
     public function edit(Group $group): View
     {
-//        Gate::authorize('edit', $group);
+        Gate::authorize('edit', $group);
 
         return view('groups.edit', ['group' => $group]);
     }
@@ -89,7 +92,7 @@ class GroupController extends Controller implements HasMiddleware
      */
     public function update(UpdateGroupRequest $request, Group $group): RedirectResponse
     {
-//        Gate::authorize('update', $group);
+        Gate::authorize('update', $group);
 
         $validated = $request->validated();
         $group->update($validated);
@@ -136,7 +139,11 @@ class GroupController extends Controller implements HasMiddleware
             $query->where('location_id', $location_id);
         });
 
-        $groups = $groupQuery->get();
+        if($name == null && $location_id == null) {
+            $groups = null;
+        } else {
+            $groups = $groupQuery->get();
+        }
 
         // return page title if search by topic and/or location
         if(($name) && (!$location_name)) {
@@ -169,11 +176,11 @@ class GroupController extends Controller implements HasMiddleware
      */
     public function leave(Request $request): RedirectResponse
     {
-        $group_id = $request->input('group_id');
+        $group_id = $request->get('group_id');
 
         Auth::User()->groups()->detach($group_id);
 
-        return redirect(route('groups.show', ['group' => $group_id]));;
+        return redirect(route('dashboard'));
     }
 
     /**

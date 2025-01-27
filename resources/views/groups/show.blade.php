@@ -78,7 +78,7 @@
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         name="user_name" id="user_name" type="text" autocomplete="off" value={{ old('user_name') }}>
                     @error('user_name')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="alert text-red-600 alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <button type="submit" class="px-6 py-2 lg:mt-0 text-sm bg-blue-600 hover:bg-blue-400 text-white font-bold rounded-lg">Add Co-Admin</button>

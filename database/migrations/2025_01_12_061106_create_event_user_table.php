@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('event_user', function (Blueprint $table) {
+            $table->id();
             $table->integer('event_id');
             $table->integer('user_id');
             $table->softDeletes();

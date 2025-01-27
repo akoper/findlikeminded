@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Group;
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
@@ -15,6 +16,8 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of all events.
      */
@@ -28,7 +31,9 @@ class EventController extends Controller
      */
     public function create(): View
     {
-        $group_id = request()->input('group_id');
+        $group_id = request()->get('group_id');
+
+        $this->authorize('createEvent', Group::find($group_id));
 
         return view('events.create', ['group_id' => $group_id]);
     }
@@ -38,6 +43,10 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request): RedirectResponse
     {
+        $group_id = request()->get('group_id');
+
+        $this->authorize('createEvent', Group::find($group_id));
+
         $validated = $request->validated();
         $event = new Event();
         $event->fill($validated);
@@ -54,7 +63,11 @@ class EventController extends Controller
      */
     public function show(Event $event): View
     {
-        $inEvent = User::find(auth()->user()->id)->events()->where('event_id', $event->id)->exists();
+        /** @var User $user */
+        $user = auth()->user();
+        $this->authorize('view', $event);
+
+        $inEvent = $user->events()->where('event_id', $event->id)->exists();
 
         return view('events.show', ['event' => $event, 'inEvent' => $inEvent]);
     }
@@ -101,10 +114,13 @@ class EventController extends Controller
     public function join(Request $request): RedirectResponse
     {
         $event_id = $request->input('event_id');
+        $event = Event::find($event_id);
+
+        $this->authorize('join', $event);
 
         Auth::user()->events()->attach($event_id);
 
-        return back();
+        return redirect(route('dashboard'));
     }
 
     /**
@@ -113,9 +129,12 @@ class EventController extends Controller
     public function leave(Request $request): RedirectResponse
     {
         $event_id = $request->input('event_id');
+        $event = Event::find($event_id);
+
+        $this->authorize('join', $event);
 
         Auth::User()->events()->detach($event_id);
 
-        return back();
+        return redirect(route('dashboard'));
     }
 }

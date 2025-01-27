@@ -11,7 +11,7 @@
                 class="required shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="name" id="name" type="text" value={{ old('name') }}>
             @error('name')
-            <div class="alert text-red-600 alert-danger">{{ $message }}</div>
+                <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
@@ -20,18 +20,18 @@
             <textarea class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
             id="description" name="description" rows="7">{{ old('description') }}</textarea>
             @error('description')
-            <div class="alert alert-danger">{{ $message }}</div>
+                <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="mb-4">
             <input type="hidden" name="location_id" id="location_id" value={{ old('location_id') }}>
-            <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="location">Location</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="location">Location *</label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="location_name" id="location_name" type="text" autocomplete="off" value={{ old('location_name') }}>
+                name="location_name" id="location_name" type="text" autocomplete="off" value={{old('location_name')}}>
             @error('location_name')
-            <div class="alert alert-danger">{{ $message }}</div>
+                <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
