@@ -85,14 +85,14 @@ class EventController extends Controller
     /**
      * Update the event in storage.
      */
-    public function update(UpdateEventRequest $request, Event $event): View
+    public function update(UpdateEventRequest $request, Event $event): RedirectResponse
     {
         Gate::authorize('update', $event);
 
         $validated = $request->validated();
         $event->update($validated);
 
-        return view('events.show', ['event' => $event]);
+        return redirect( route('events.show', ['event' => $event]) );
     }
 
     /**

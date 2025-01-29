@@ -68,7 +68,7 @@
     @if($event->creator_id == Auth::user()->id)
         <div class="font-bold mt-8 mb-4">Event Organizer Tools</div>
 
-        <a href="{{ url('events/' . $event->id . '/edit') }}" class="text-blue-600 underline block mb-4">{{ __('Edit Event') }}</a>
+        <a href="{{ route('events.edit', $event) }}" class="text-blue-600 underline block mb-4">{{ __('Edit Event') }}</a>
 
         <form method="POST" action="{{ route('events.destroy', $event) }}">
             @csrf

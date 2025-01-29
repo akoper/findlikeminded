@@ -69,7 +69,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="location">End Date</label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="end_date" id="end_date" type="date" value="{{ old('end_date', $event->end_date->format('Y-m-d')) }}">
+                name="end_date" id="end_date" type="date" value="{{ old('end_date', isset($event->end_date) ? $event->end_date->format('Y-m-d') : null ) }}">
             @error('end_date')
                 <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
@@ -79,7 +79,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="location">End Time</label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="end_time" id="end_time" type="time" value="{{ old('end_time', $event->end_time->format('H:i')) }}">
+                name="end_time" id="end_time" type="time" value="{{ old('end_time', isset($event->end_time) ? $event->end_time->format('H:i') : null) }}">
             @error('end_time')
                 <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
