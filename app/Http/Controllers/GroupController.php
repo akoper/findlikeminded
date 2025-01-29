@@ -32,11 +32,11 @@ class GroupController extends Controller implements HasMiddleware
     }
 
     /**
-     * Display all the groups
+     * Display the page to search groups (mobile only)
      */
-    public function index()
+    public function searchForm()
     {
-
+        return view('groups.search-form');
     }
 
     /**

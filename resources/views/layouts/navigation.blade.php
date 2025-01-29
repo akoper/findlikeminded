@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 pt-4 sm:pt-0 sm:px-6 lg:px-8">
-        <div class="flex h-72 flex-col sm:flex-row justify-center sm:h-16 md:justify-between">
+    <div class="max-w-7xl mx-auto px-4 pt-8 sm:pt-0 sm:px-6 lg:px-8">
+        <div class="flex flex-row justify-around sm:h-16 md:justify-between">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center justify-center sm:align-middle">
                     @guest
@@ -14,13 +14,15 @@
                 </div>
 
             {{-- #####################    create group button     ################  --}}
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ url('/groups/create') }}"
-                       class="w-full py-2 mt-3 sm:w-28 sm:mt-0 md:mx-2 md:px-2 lg:w-36 xl:mx-14 xl:w-40 inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Create Group</a>
+                <div class="flex items-center">
+                    <div class="hidden sm:block">
+                        <a href="{{ url('/groups/create') }}"
+                           class="w-full py-2 mt-3 sm:w-28 sm:mt-0 md:mx-2 md:px-2 lg:w-36 xl:mx-14 xl:w-40 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Create Group</a>
+                    </div>
                 </div>
 
             {{-- #####################    search groups form and button     ################  --}}
-            <div class="text-center sm:flex items-center w-full mt-3 sm:mt-0">
+            <div class="hidden sm:block text-center sm:flex items-center w-full mt-3 sm:mt-0">
                 <form action="/groups/search" method="post">
                     @csrf
                     <div>
@@ -93,7 +95,7 @@
 
             {{-- #####################    dropdown for mobile screen     ################  --}}
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center mt-2 sm:hidden">
+            <div class="-me-2 flex justify-end mt-2 sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -107,7 +109,8 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+
+        <div class="pt-2 pb-1 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
@@ -116,8 +119,24 @@
         <!-- Responsive Settings Options -->
 
         <div class="space-y-1">
+            <x-responsive-nav-link :href="route('groups.search-form')">
+                {{ __('Search Groups') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('groups.create')">
+                {{ __('Create Group') }}
+            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('profile.edit')">
                 {{ __('Profile') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="url(env('STRIPE_CUSTOMER_BILLING_PORTAL_URL'))">
+                {{ __('Billing (in Stripe)') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('contact-us')">
+                {{ __('Contact Us') }}
             </x-responsive-nav-link>
 
             <!-- Authentication -->

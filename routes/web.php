@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     })->name('subscribe-cancel');
 
     // subscribe middleware is applied to Group create and join methods in GroupController
+    Route::get('/groups/search', [GroupController::class, 'searchForm'])->name('groups.search-form');
     Route::resource('groups', GroupController::class);
     Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
     Route::post('/groups/add-admin', [GroupController::class, 'addAdmin'])->name('groups.addAdmin');

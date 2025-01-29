@@ -106,7 +106,7 @@
                             topics you're interested in, discover groups about them, join the groups and meet
                             and do things with people who also like that!</p>
                         <p class="text-lg lg:text-2xl mb-4">Birdwatching, knitting, running, first-time mothers,
-                         university alumni, hiking, Broadway plays - the possibilities are endless!</p>
+                         speak Spanish, hiking, Broadway plays - the possibilities are endless!</p>
 
                         <div class="flex items-center flex-col mb-3 sm:mb-4 lg:flex-row lg:justify-between">
 
@@ -143,9 +143,13 @@
 
                         <p class="text-lg lg:text-2xl mt-4 mb-10">It's like Meetup.com. However, Meetup charges the meetup
                             organizer $29 a month. Most organizers can't afford to pay this very long, so they stop
-                            paying and then Meetup deletes the group. With
-                            FindLikeMinded.com, each user gets to join two groups for free. If they want to join more
-                            groups than that, then they get billed $1 per group per month.  This way, no one pays much,
+                            paying and then Meetup deletes the group.
+                        </p>
+                        <p class="text-lg lg:text-2xl mt-4 mb-10">
+                            With FindLikeMinded.com, each user gets to join two groups for free.
+                            If they want to join more
+                            groups than that, they can and they get billed $1 per group per month.  No credit
+                            card is needed for sign up and two free group memberships.  This way, no one pays much,
                             and the group, value, connections, friendships, learning and joy continue!
                         </p>
 
