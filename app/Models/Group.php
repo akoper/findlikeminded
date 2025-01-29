@@ -44,6 +44,7 @@ class Group extends Model
     public function events(): HasMany
     {
         return $this->hasMany(Event::class)
+            ->where('start_date', '>=', now())
             ->orderBy('start_date');;
     }
 

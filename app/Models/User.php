@@ -57,11 +57,13 @@ class User extends Authenticatable
 
     public function groups(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class, GroupUser::class);
+        return $this->belongsToMany(Group::class, GroupUser::class)
+            ->whereNull('group_user.deleted_at');
     }
 
     public function events(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class, EventUser::class);
+        return $this->belongsToMany(Event::class, EventUser::class)
+            ->where('start_date', '>=', now());
     }
 }
