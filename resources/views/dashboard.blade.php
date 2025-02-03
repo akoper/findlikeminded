@@ -2,12 +2,16 @@
 
     <p class="mb-5 text-2xl font-bold">{{ Auth::user()->name }}'s Dashboard</p>
 
-    <a href="{{ route('subscribe') }}" class="py-2 mt-4 mb-8 w-36 inline-block text-white bg-yellow-500 hover:bg-yellow-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Subscribe</a>
-
     @if ($user->subscribed())
         <p class="bg-green-300">$user->subscribed() = true</p>
     @else
         <p class="bg-red-300">$user->subscribed() = false</p>
+    @endif
+
+    @if ($user->subscribed(env('PRODUCT_NAME')))
+        <p class="bg-green-300">$user->subscribed(env('PRODUCT_NAME')) = true</p>
+    @else
+        <p class="bg-red-300">$user->subscribed(env('PRODUCT_NAME')) = false</p>
     @endif
 
     <p class="mb-4 mt-10 text-xl font-bold">Your Upcoming Events</p>

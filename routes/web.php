@@ -28,11 +28,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/autocomplete', [UserController::class, 'autocomplete'])
         ->name('users.autocomplete');
 
-    Route::get('/subscribe', function (Request $request) {
+    Route::get('/subscribe/{group_id}', function (Request $request, int $group_id = null) {
+
+        if ($group_id) {
+            $route = 'groups/join/' . $group_id;
+        } else {
+            $route = 'groups/create';
+        }
         return $request->user()
             ->newSubscription(env('PRODUCT_NAME'), env('PROD_ID'))
             ->checkout([
-                'success_url' => route('subscribe-success'),
+                'success_url' => route($route),
                 'cancel_url' => route('subscribe-cancel'),
             ]);
     })->name('subscribe');
@@ -50,7 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('groups', GroupController::class);
     Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
     Route::post('/groups/add-admin', [GroupController::class, 'addAdmin'])->name('groups.addAdmin');
-    Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
+    Route::any('/groups/join/{group_id}', [GroupController::class, 'join'])->name('groups.join');
 });
 
 // on welcome page for visitors so they search for a topic  interest, find a group and sign up

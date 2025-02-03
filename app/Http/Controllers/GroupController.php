@@ -44,6 +44,13 @@ class GroupController extends Controller implements HasMiddleware
      */
     public function create(): View
     {
+        $subscription = Auth::user()->subscription(env('PRODUCT_NAME'));
+        // if they are a subscriber, they are beyond two free groups & increase their quantity of subscriptions
+        // the first signup will set subscription quantity to 1.  we only want to increment amount after that
+        if ($subscription->quantity > 0) {
+            $subscription->updateQuantity($subscription->quantity + 1);
+        }
+
         return view('groups.create');
     }
 
@@ -119,7 +126,8 @@ class GroupController extends Controller implements HasMiddleware
     {
         $name = $request->get('name');
 
-        // location search input on top nav and welcome page have different id's bc jQuery autocomplete
+        // location search input on top nav and welcome page have different id's
+        // bc jQuery autocompletes would interfere with each other on one page
         if($request->get('location_id')) {
             $location_id = $request->get('location_id');
             $location_name = $request->get('location_name');
@@ -160,25 +168,41 @@ class GroupController extends Controller implements HasMiddleware
     }
 
     /**
-     * A user joins the group
+     * A user joins a group
      */
-    public function join(Request $request): RedirectResponse
+    public function join(Request $request, int $group_id = null): RedirectResponse
     {
         $group_id = $request->input('group_id');
 
-        Auth::user()->groups()->attach($group_id, ['role'=>UserRoleEnum::MEMBER]);
+        Auth::user()->groups()->attach($group_id, ['role' => UserRoleEnum::MEMBER]);
 
-        return redirect(route('groups.show', ['group' => $group_id]));;
+        $subscription = Auth::user()->subscription(env('PRODUCT_NAME'));
+        // the first signup will set subscription quantity to 1.  we only want to increment amount after that
+        if ($subscription->quantity > 0) {
+            $subscription->updateQuantity($subscription->quantity + 1);
+        }
+        // Create a new invoice for the customer with the "auto_advance_invoice_items" parameter set to true
+//        $invoice = Auth::user()->createInvoice(['auto_advance_invoice_items' => true]);
+//        // Pay the invoice
+//        $invoice->pay();
+
+        return redirect(route('groups.show', ['group' => $group_id]));
     }
 
     /**
-     * A user leaves the group
+     * A user leaves a group
      */
     public function leave(Request $request): RedirectResponse
     {
         $group_id = $request->get('group_id');
 
         Auth::User()->groups()->detach($group_id);
+
+        $subscription = Auth::user()->subscription(env('PRODUCT_NAME'));
+
+        if ($subscription->quantity > 0) {
+            $subscription->updateQuantity($subscription->quantity - 1);
+        }
 
         return redirect(route('dashboard'));
     }

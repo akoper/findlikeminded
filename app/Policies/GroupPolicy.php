@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enum\UserRoleEnum;
 use App\Models\Group;
 use App\Models\User;
 use App\Models\GroupUser;
@@ -46,40 +47,65 @@ class GroupPolicy
     /**
      * Determine whether the user can see the form to edit group
      */
-    public function edit(User $user, Group $group): bool
+    public function edit(User $user, Group $group): Response
     {
-        return $user->id === $group->admins->id;
+        return GroupUser::where('user_id', $user->id)
+            ->where('group_id', $group->id)
+            ->where('role', UserRoleEnum::ADMIN)
+            ->exists()
+            ? Response::allow()
+            : Response::deny("You are not an admin of the group so you can't edit the group");
     }
 
     /**
      * Determine whether the user can update the group.
      */
-    public function update(User $user, Group $group): bool
+    public function update(User $user, Group $group): Response
     {
-        return $user->id === $group->admins()->id;
+        return GroupUser::where('user_id', $user->id)
+            ->where('group_id', $group->id)
+            ->where('role', UserRoleEnum::ADMIN)
+            ->exists()
+            ? Response::allow()
+            : Response::deny("You are not an admin of the group so you can't edit the group");
     }
 
     /**
      * Determine whether the user can delete the group.
      */
-    public function delete(User $user, Group $group): bool
+    public function delete(User $user, Group $group): Response
     {
-        return $user->id === $group->admins->id;
+        return GroupUser::where('user_id', $user->id)
+            ->where('group_id', $group->id)
+            ->where('role', UserRoleEnum::ADMIN)
+            ->exists()
+            ? Response::allow()
+            : Response::deny("You are not an admin of the group so you can't delete the group");
     }
 
     /**
      * Determine whether the user can restore the group.
      */
-    public function restore(User $user, Group $group): bool
+    public function restore(User $user, Group $group): Response
     {
-        return $user->id === $group->admins->id;
+        return GroupUser::where('user_id', $user->id)
+            ->where('group_id', $group->id)
+            ->where('role', UserRoleEnum::ADMIN)
+            ->exists()
+            ? Response::allow()
+            : Response::deny("You are not an admin of the group so you can't restore the group");
     }
 
     /**
      * Determine whether the user can permanently delete the group.
      */
-    public function forceDelete(User $user, Group $group): bool
+    public function forceDelete(User $user, Group $group): Response
     {
-        return $user->id === $group->admins->id;
+        return GroupUser::where('user_id', $user->id)
+            ->where('group_id', $group->id)
+            ->where('role', UserRoleEnum::ADMIN)
+            ->exists()
+            ? Response::allow()
+            : Response::deny("You are not an admin of the group so you can't forceDelete the group");
     }
 }
