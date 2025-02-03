@@ -8,7 +8,7 @@
                     @csrf
                     <div class="">
                         <input type="hidden" name="group_id" value="{{ $group->id }}" id="group_id" />
-                        <button class="px-3 py-2 text-sm bg-gray-500 hover:bg-gray-300 text-white font-bold lg:mt-0 rounded-lg">Leave Group</button>
+                        <button class="px-3 py-2 text-sm bg-gray-500 hover:bg-gray-800 text-white font-bold lg:mt-0 rounded-lg">Leave Group</button>
                     </div>
                 </form>
             @else
@@ -16,7 +16,7 @@
                     @csrf
                     <div class="">
                         <input type="hidden" name="group_id" value="{{ $group->id }}" id="group_id" />
-                        <button class="px-6 py-2 text-sm bg-green-600 hover:bg-green-400 text-white font-bold lg:mt-0 rounded-lg">Join Group</button>
+                        <button class="px-6 py-2 text-sm bg-green-700 hover:bg-green-800 text-white font-bold lg:mt-0 rounded-lg">Join Group</button>
                     </div>
                 </form>
             @endif
@@ -51,7 +51,7 @@
         </ul>
     </div>
 
-    <a href="{{ route('events.create', ['group_id' => $group->id]) }}" class="py-2 w-40 inline-block text-white bg-orange-600 hover:bg-orange-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm   focus:outline-none text-center">Create Event</a>
+    <a href="{{ route('events.create', ['group_id' => $group->id]) }}" class="py-2 w-40 inline-block text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm   focus:outline-none text-center">Create Event</a>
 
     <div class="my-5">
         <span class="font-bold">Administrator(s):</span>
@@ -65,7 +65,7 @@
     @if($isAdmin == true)
     <div class="font-bold mt-8 mb-4">Group Administrator Tools</div>
 
-        <a href="{{ route('groups.edit', $group) }}" class="py-2 mt-4 mb-8 w-36 inline-block text-white bg-yellow-500 hover:bg-yellow-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Edit Group</a>
+        <a href="{{ route('groups.edit', $group) }}" class="py-2 mt-4 mb-8 w-36 inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Edit Group</a>
 
         <form action="/groups/add-admin" method="post">
             @csrf
@@ -81,7 +81,7 @@
                     <div class="alert text-red-600 alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <button type="submit" class="px-6 py-2 lg:mt-0 text-sm bg-blue-600 hover:bg-blue-400 text-white font-bold rounded-lg">Add Co-Admin</button>
+                <button type="submit" class="px-6 py-2 lg:mt-0 text-sm bg-blue-700 hover:bg-blue-800 text-white font-bold rounded-lg">Add Co-Admin</button>
             </div>
         </form>
 

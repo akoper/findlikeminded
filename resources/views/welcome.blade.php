@@ -130,7 +130,7 @@
                                             <input type="text" name="location_name" id="location_name" placeholder="City" autocomplete="off"
                                                    class="w-full px-3 py-4 mt-2 sm:mt-0 sm:w-44 md:w-44 lg:w-56 lg:max-w-80  placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring "/>
 
-                                            <button class="w-40 font-bold py-4 px-6 mt-4 sm:w-36 sm:px-3 lg:mt-0 bg-red-600 hover:bg-red-400 text-white rounded-lg">
+                                            <button class="w-40 font-bold py-4 px-6 mt-4 sm:w-36 sm:px-3 lg:mt-0 bg-orange-500 hover:bg-orange-600 text-white rounded-lg">
                                                 Search Groups</button>
                                         </div>
                                     </form>

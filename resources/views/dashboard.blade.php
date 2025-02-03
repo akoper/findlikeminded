@@ -2,7 +2,7 @@
 
     <p class="mb-5 text-2xl font-bold">{{ Auth::user()->name }}'s Dashboard</p>
 
-    <a href="{{ route('subscribe') }}" class="py-2 mt-4 mb-8 w-36 inline-block text-white bg-yellow-500 hover:bg-yellow-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Subscribe</a>
+    <a href="{{ route('subscribe') }}" class="py-2 mt-4 mb-8 w-36 inline-block text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm focus:outline-none text-center">Subscribe</a>
 
     @if ($user->subscribed())
         <p class="bg-green-300">$user->subscribed() = true</p>

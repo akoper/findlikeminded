@@ -8,7 +8,7 @@
                     @csrf
                     <div class="">
                         <input type="hidden" name="event_id" value="{{ $event->id }}" id="event_id" />
-                        <button class="px-3 py-2 text-sm bg-gray-500 hover:bg-gray-300 text-white font-bold lg:mt-0 rounded-lg">Leave Event</button>
+                        <button class="px-3 py-2 text-sm bg-gray-500 hover:bg-gray-800 text-white font-bold lg:mt-0 rounded-lg">Leave Event</button>
                     </div>
                 </form>
             @else
@@ -16,7 +16,7 @@
                     @csrf
                     <div class="">
                         <input type="hidden" name="event_id" value="{{ $event->id }}" id="event_id" />
-                        <button class="px-6 py-2 text-sm bg-green-600 hover:bg-green-400 text-white font-bold lg:mt-0 rounded-lg">Join Event</button>
+                        <button class="px-6 py-2 text-sm bg-green-700 hover:bg-green-800 text-white font-bold lg:mt-0 rounded-lg">Join Event</button>
                     </div>
                 </form>
             @endif
