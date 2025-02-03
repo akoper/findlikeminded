@@ -19,7 +19,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 class GroupController extends Controller implements HasMiddleware
 {
     /**
-     * Apply subscribe middleware to create and join methods.  Checks
+     * Apply subscribe middleware to join and store methods.  Checks
      * to see if user is in 2 groups - the free amount - or a paying
      * subscriber and redirects to Stripe pay/subscribe page if these
      * conditions aren't met
@@ -27,7 +27,7 @@ class GroupController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('subscribe', only: ['create', 'join']),
+            new Middleware('subscribe', only: ['store', 'join']),
         ];
     }
 
@@ -44,13 +44,6 @@ class GroupController extends Controller implements HasMiddleware
      */
     public function create(): View
     {
-        $subscription = Auth::user()->subscription(env('PRODUCT_NAME'));
-        // if they are a subscriber, they are beyond two free groups & increase their quantity of subscriptions
-        // the first signup will set subscription quantity to 1.  we only want to increment amount after that
-        if ($subscription->quantity > 0) {
-            $subscription->updateQuantity($subscription->quantity + 1);
-        }
-
         return view('groups.create');
     }
 
