@@ -161,7 +161,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="my-6 text-sm sm:mt-10 text-gray-500 text-center">Made with &#10084; by Andrew Koper in Detroit, Michigan</div>
+                                <div class="my-8 text-sm sm:mt-10 text-gray-500 text-center">Made with &#10084; by Andrew Koper in Detroit, Michigan</div>
                             </div>
                     </main>
 
