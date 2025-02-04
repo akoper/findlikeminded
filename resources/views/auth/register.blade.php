@@ -61,6 +61,11 @@
         </a>
     </div>
 
+    <p class="mt-4">If you create your FindLikeMinded account with your Google account,
+        if you log in to FindLikeMinded with your email address and password (you can also login
+        with you Google account), your FindLikeMinded
+        password will be your Google password.</p>
+
 {{--    <div class="flex items-center justify-center mt-6">--}}
 {{--        <a href="{{ route('login.facebook') }}" class="drop-shadow">--}}
 {{--            <img src="{{ asset('images/login_Facebook.png') }}" class="drop-shadow" alt="Login with your Facebook account button" style="width:250px">--}}
