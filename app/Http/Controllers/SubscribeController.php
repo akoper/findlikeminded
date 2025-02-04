@@ -22,7 +22,7 @@ class SubscribeController extends Controller
 //    public function subscribe(Request $request)
 //    {
 //        return $request->user()
-//            ->newSubscription(env('PROD_ID'), env('PRICE_ID'))
+//            ->newSubscription(config('services.stripe.prod_id'), config('services.stripe.price_id'))
 //            ->checkout([
 //                'success_url' => route('success'),
 //                'cancel_url' => route('cancel'),
@@ -36,7 +36,7 @@ class SubscribeController extends Controller
     public function subscribeCreateGroup(Request $request)
     {
         return Auth::user()
-            ->newSubscription(env('PROD_ID'), env('PRICE_ID'))
+            ->newSubscription(config('services.stripe.prod_id'), config('services.stripe.price_id'))
             ->checkout([
                 'success_url' => route('successCreateGroup'),
                 'cancel_url' => route('cancel'),
@@ -50,7 +50,7 @@ class SubscribeController extends Controller
     public function subscribeJoinGroup(Request $request)
     {
         return Auth::user()
-            ->newSubscription(env('PROD_ID'), env('PRICE_ID'))
+            ->newSubscription(config('services.stripe.prod_id'), config('services.stripe.price_id'))
             ->checkout([
                 'success_url' => route('successJoinGroup'),
                 'cancel_url' => route('cancel'),

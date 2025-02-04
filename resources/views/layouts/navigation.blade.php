@@ -71,7 +71,7 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="url(env('STRIPE_CUSTOMER_BILLING_PORTAL_URL'))">
+                        <x-dropdown-link :href="url(config('services.stripe.customer_billing_portal_url'))">
                             {{ __('Billing (in Stripe)') }}
                         </x-dropdown-link>
 
@@ -131,7 +131,7 @@
                 {{ __('Profile') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="url(env('STRIPE_CUSTOMER_BILLING_PORTAL_URL'))">
+            <x-responsive-nav-link :href="url(config('services.stripe.customer_billing_portal_url'))">
                 {{ __('Billing (in Stripe)') }}
             </x-responsive-nav-link>
 

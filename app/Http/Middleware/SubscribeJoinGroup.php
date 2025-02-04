@@ -31,7 +31,7 @@ class SubscribeJoinGroup
 
         // have they used all of their free group memberships and are they not a subscriber
         // who's provided payment information?  Redirect to Stripe Checkout form if yes
-        if ($noOfGroups >= 2 && !$request->user()?->subscribed(env('PROD_ID'))) {
+        if ($noOfGroups >= 2 && !$request->user()?->subscribed(config('services.stripe.prod_id'))) {
             return redirect('/subscribeJoinGroup');
         }
 

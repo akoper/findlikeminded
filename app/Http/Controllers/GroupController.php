@@ -72,7 +72,7 @@ class GroupController extends Controller implements HasMiddleware
         $noOfGroups = GroupUser::where('user_id', auth()->user()->id)->count();
 
         // increase quality of subscription if more than two free and subscriber
-        $subscription = Auth::user()->subscription(env('PROD_ID'));
+        $subscription = Auth::user()->subscription(config('services.stripe.prod_id'));
         if ($subscription && $noOfGroups >= Group::NUMBER_FREE_GROUPS) {
             $subscription->updateQuantity($subscription->quantity + 1);
         }
@@ -190,7 +190,7 @@ class GroupController extends Controller implements HasMiddleware
         $noOfGroups = GroupUser::where('user_id', auth()->user()->id)->count();
 
         // increase quality of subscription if more than two free and subscriber
-        $subscription = Auth::user()->subscription(env('PROD_ID'));
+        $subscription = Auth::user()->subscription(config('services.stripe.prod_id'));
         if ($subscription && $noOfGroups >= Group::NUMBER_FREE_GROUPS) {
             $subscription->updateQuantity($subscription->quantity + 1);
         }
@@ -207,7 +207,7 @@ class GroupController extends Controller implements HasMiddleware
 
         Auth::User()->groups()->detach($group_id);
 
-        $subscription = Auth::user()->subscription(env('PROD_ID'));
+        $subscription = Auth::user()->subscription(config('services.stripe.prod_id'));
         if ($subscription->quantity > 0) {
             $subscription->updateQuantity($subscription->quantity - 1);
         }

@@ -47,4 +47,14 @@ return [
         'redirect' => env('FACEBOOK_REDIRECT_URI'),
     ],
 
+    'stripe' => [
+        'product_name' => env('PRODUCT_NAME'),
+        'prod_id' => env('PROD_ID'),
+        'price_id' => env('PRICE_ID'),
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+        'customer_billing_portal_url' => env('STRIPE_CUSTOMER_BILLING_PORTAL_URL')
+    ],
+
 ];
