@@ -7,6 +7,7 @@ use App\Http\Requests\GroupUserRequest;
 use App\Models\Group;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
+use App\Models\GroupUser;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,15 +20,23 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 class GroupController extends Controller implements HasMiddleware
 {
     /**
-     * Apply subscribe middleware to create and join methods.  Checks
-     * to see if user is in 2 groups - the free amount - or a paying
-     * subscriber and redirects to Stripe pay/subscribe page if these
-     * conditions aren't met
+     * Apply subscribe middleware to Group join and store methods (not routes
+     * in this case because resource controller makes it hard to single out create route).
+     * Users can join two groups for free. We check the Group join and create methods
+     * to see if they've hit the free limit and they're not a subscriber and now need
+     * provide their payment info and become a Stripe customer with a Stripe subscription
+     * to join more groups.
+     * There is a bunch of duplicative between the create and join flows
+     * but because the routes Stripe Checkout needs to receive and send the user on to
+     * after they successfully fill out its secure payment form is different for these two things,
+     * the request object doesn't exist after going through Stripe Checkout, the group data is
+     * received via POST and there are different values, this works
      */
     public static function middleware(): array
     {
         return [
-            new Middleware('subscribe', only: ['create', 'join']),
+            new Middleware('subscribeCreateGroup', only: ['store']),
+            new Middleware('subscribeJoinGroup', only: ['join'])
         ];
     }
 
@@ -59,6 +68,14 @@ class GroupController extends Controller implements HasMiddleware
         $group->save();
 
         Auth::user()->groups()->attach($group, ['role'=>UserRoleEnum::ADMIN]);
+
+        $noOfGroups = GroupUser::where('user_id', auth()->user()->id)->count();
+
+        // increase quality of subscription if more than two free and subscriber
+        $subscription = Auth::user()->subscription(env('PRODUCT_NAME'));
+        if ($subscription && $noOfGroups >= 2) {
+            $subscription->updateQuantity($subscription->quantity + 1);
+        }
 
         return redirect( route('groups.show', ['group' => $group]) );
     }
@@ -97,7 +114,8 @@ class GroupController extends Controller implements HasMiddleware
         $validated = $request->validated();
         $group->update($validated);
 
-        return redirect(route('groups.show', ['group' => $group]));;}
+        return redirect(route('groups.show', ['group' => $group]));
+    }
 
     /**
      * Remove a group from storage.
@@ -119,7 +137,8 @@ class GroupController extends Controller implements HasMiddleware
     {
         $name = $request->get('name');
 
-        // location search input on top nav and welcome page have different id's bc jQuery autocomplete
+        // location search input on top nav and welcome page have different id's
+        // bc jQuery autocompletes would interfere with each other on one page
         if($request->get('location_id')) {
             $location_id = $request->get('location_id');
             $location_name = $request->get('location_name');
@@ -160,25 +179,38 @@ class GroupController extends Controller implements HasMiddleware
     }
 
     /**
-     * A user joins the group
+     * Add a user to a group and increment subscription quantity if they are in > free amount
      */
     public function join(Request $request): RedirectResponse
     {
         $group_id = $request->input('group_id');
 
-        Auth::user()->groups()->attach($group_id, ['role'=>UserRoleEnum::MEMBER]);
+        Auth::user()->groups()->attach($group_id, ['role' => UserRoleEnum::MEMBER]);
 
-        return redirect(route('groups.show', ['group' => $group_id]));;
+        $noOfGroups = GroupUser::where('user_id', auth()->user()->id)->count();
+
+        // increase quality of subscription if more than two free and subscriber
+        $subscription = Auth::user()->subscription(env('PRODUCT_NAME'));
+        if ($subscription && $noOfGroups >= 2) {
+            $subscription->updateQuantity($subscription->quantity + 1);
+        }
+
+        return redirect(route('groups.show', ['group' => $group_id]));
     }
 
     /**
-     * A user leaves the group
+     * A user leaves a group
      */
     public function leave(Request $request): RedirectResponse
     {
         $group_id = $request->get('group_id');
 
         Auth::User()->groups()->detach($group_id);
+
+        $subscription = Auth::user()->subscription(env('PRODUCT_NAME'));
+        if ($subscription->quantity > 0) {
+            $subscription->updateQuantity($subscription->quantity - 1);
+        }
 
         return redirect(route('dashboard'));
     }

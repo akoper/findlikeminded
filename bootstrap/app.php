@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Middleware\Subscribe;
+use App\Http\Middleware\SubscribeCreateGroup;
+use App\Http\Middleware\SubscribeJoinGroup;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -15,7 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo('/register');
 
         $middleware->alias([
-            'subscribe' => Subscribe::class,
+//            'subscribe' => Subscribe::class,
+            'subscribeJoinGroup' => SubscribeJoinGroup::class,
+            'subscribeCreateGroup' => SubscribeCreateGroup::class,
         ]);
 
         $middleware->validateCsrfTokens(except: [

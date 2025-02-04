@@ -5,6 +5,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleLoginController;
 use Illuminate\Http\Request;
@@ -28,22 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/autocomplete', [UserController::class, 'autocomplete'])
         ->name('users.autocomplete');
 
-    Route::get('/subscribe', function (Request $request) {
-        return $request->user()
-            ->newSubscription(env('PRODUCT_NAME'), env('PROD_ID'))
-            ->checkout([
-                'success_url' => route('subscribe-success'),
-                'cancel_url' => route('subscribe-cancel'),
-            ]);
-    })->name('subscribe');
-
-    Route::get('/subscribe/subscribe-success', function () {
-        return view('subscribe.subscribe-success');
-    })->name('subscribe-success');
-
-    Route::get('/subscribe/subscribe-cancel', function () {
-        return view('subscribe.subscribe-cancel');
-    })->name('subscribe-cancel');
+    Route::get('/subscribeCreateGroup', [SubscribeController::class, 'subscribeCreateGroup'])->name('subscribeCreateGroup');
+    Route::get('/subscribeJoinGroup', [SubscribeController::class, 'subscribeJoinGroup'])->name('subscribeJoinGroup');
+    Route::get('/subscribe/successCreateGroup', [SubscribeController::class, 'successCreateGroup'])->name('successCreateGroup');
+    Route::get('/subscribe/successJoinGroup', [SubscribeController::class, 'successJoinGroup'])->name('successJoinGroup');
+    Route::get('/subscribe/cancel', [SubscribeController::class, 'cancel'])->name('cancel');
 
     // subscribe middleware is applied to Group create and join methods in GroupController
     Route::get('/groups/search', [GroupController::class, 'searchForm'])->name('groups.search-form');
@@ -53,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
 });
 
-// on welcome page for visitors so they search for a topic  interest, find a group and sign up
+// on welcome page for visitors so they search for a topic of interest, find a group and sign up
 Route::post('/groups/search', [GroupController::class, 'search'])->name('groups.search');
 
 // also for search group feature
