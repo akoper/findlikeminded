@@ -20,8 +20,8 @@ class UserController extends Controller
     }
 
     /**
-     * Populate the user text input jQuery autocomplete.
-     * On the groups.show page, if admin, allows admin to find users and set as co-admin
+     * Populate the 'user' text input jQuery autocomplete.
+     * On the groups.show page, if admin, allows admin to find a user and make co-admin
      * Called with every user keystroke
      */
     public function autocomplete(Request $request): JsonResponse
