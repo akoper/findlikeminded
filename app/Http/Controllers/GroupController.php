@@ -73,7 +73,7 @@ class GroupController extends Controller implements HasMiddleware
 
         // increase quality of subscription if more than two free and subscriber
         $subscription = Auth::user()->subscription(env('PRODUCT_NAME'));
-        if ($subscription && $noOfGroups >= 2) {
+        if ($subscription && $noOfGroups >= Group::NUMBER_FREE_GROUPS) {
             $subscription->updateQuantity($subscription->quantity + 1);
         }
 
@@ -191,7 +191,7 @@ class GroupController extends Controller implements HasMiddleware
 
         // increase quality of subscription if more than two free and subscriber
         $subscription = Auth::user()->subscription(env('PRODUCT_NAME'));
-        if ($subscription && $noOfGroups >= 2) {
+        if ($subscription && $noOfGroups >= Group::NUMBER_FREE_GROUPS) {
             $subscription->updateQuantity($subscription->quantity + 1);
         }
 

@@ -19,6 +19,8 @@ class Group extends Model
 
     use SoftDeletes;
 
+    const NUMBER_FREE_GROUPS = 2;
+
     protected $fillable = [
         'name',
         'description',
