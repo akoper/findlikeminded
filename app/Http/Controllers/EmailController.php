@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enum\UserRoleEnum;
+use App\Http\Requests\EmailRequest;
 use App\Mail\Email;
 use App\Models\Event;
 use App\Models\EventUser;
@@ -10,6 +11,7 @@ use App\Models\Group;
 use App\Models\GroupUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
@@ -33,21 +35,14 @@ class EmailController extends Controller
     /**
      * Receive email message, generate recipients and send to mailer
      */
-    public function send(Request $request): View
+    public function send(EmailRequest $request): View
     {
-        $validated = $request->validate([
-            'subject' => 'required|max:255',
-            'message' => 'required|max:3000',
-            'type' => 'string',
-            'group_id' => 'nullable|integer',
-            'event_id' => 'nullable|integer'
-        ]);
-
-        $subject = $request->input('subject');
-        $emailmessage = $request->input('message');
-        $type = $request->input('type');
-        $group_id = $request->get('group_id');
-        $event_id = $request->get('event_id');
+        $validated = $request->validated();
+        $subject = $validated['subject'];
+        $emailmessage =  $validated['message']; // message is a reserved word with Mail
+        $type =  $validated['type'];
+        $group_id =  $validated['group_id'];
+        $event_id = $validated['event_id'];
 
         $recipient_ids = [];
 
@@ -73,6 +68,10 @@ class EmailController extends Controller
             return view('email-none');
         }
 
+//        $group = Group::find($group_id);
+//        $event = Event::find($event_id);
+        $sender = Auth::user()->name;
+
         $emails = [];
 
         foreach($recipient_ids as $recipient) {
@@ -80,17 +79,11 @@ class EmailController extends Controller
             array_push($emails, $email->email);
         }
 
-//        dd($emails);
+        // dd($emails);
 
         foreach($emails as $email) {
-            Mail::to($email)->send(new Email($subject, $emailmessage));
+            Mail::to($email)->send(new Email($subject, $emailmessage, $sender));
         }
-
-//        foreach($emails as $email) {
-//            Mail::raw($message, function ($headers, $email, $subject) {
-//                $headers->to($email)->subject($subject);
-//            });
-//        }
 
         return view('email-sent');
     }

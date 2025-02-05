@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>[FindLikeMinded] {{ $subject }}</title>
-</head>
-<body>
+    <head>
+        <title>{{ $subject }}</title>
+    </head>
+    <body>
+        <p>{{ $emailmessage }}</p>
 
-<p><b>Here is a message for you from a person involved in a group or event you're in in
-    <a href="https://findlikeminded.com/">FindLikeMinded</a>:</b></p>
+        <p>The above message is from {{ $sender }} who is in a group
+            or event you're in at
+            <a href="https://findlikeminded.com/">FindLikeMinded</a></p>
 
-<p>{{ $emailmessage }}</p>
-
-</body>
+        <p>This email was sent by the application.  Replying to it will not reach the sender.</p>
+    </body>
 </html>

@@ -2,6 +2,8 @@
 
 namespace App\Mail;
 
+use App\Models\Event;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,7 +22,8 @@ class Email extends Mailable
      */
     public function __construct(
         public $subject,
-        public $emailmessage
+        public $emailmessage,
+        public string $sender,
     ) { }
 
     /**
