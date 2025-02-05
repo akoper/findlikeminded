@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\FacebookController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProfileController;
@@ -41,6 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/groups/leave', [GroupController::class, 'leave'])->name('groups.leave');
     Route::post('/groups/add-admin', [GroupController::class, 'addAdmin'])->name('groups.addAdmin');
     Route::post('/groups/join', [GroupController::class, 'join'])->name('groups.join');
+
+    Route::get('/email-form', [EmailController::class, 'emailForm'])->name('email.form');
+    Route::post('/send', [EmailController::class, 'send'])->name('email.send');
 });
 
 // on welcome page for visitors so they search for a topic of interest, find a group and sign up
