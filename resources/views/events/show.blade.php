@@ -65,8 +65,12 @@
         </ul>
     </div>
 
-    @if($event->creator_id == Auth::user()->id)
+    <a class="text-blue-600 underline my-4 inline-block" href="/email-form?type=attendees-event-creator&event_id={{ $event->id }}">Send email to event organizer</a>
+
+@if($event->creator_id == Auth::user()->id)
         <div class="font-bold mt-8 mb-4">Event Organizer Tools</div>
+
+        <a class="text-blue-600 underline my-4 inline-block" href="/email-form?type=event-creator-attendees&event_id={{ $event->id }}">Send email to event attendees</a>
 
         <a href="{{ route('events.edit', $event) }}" class="text-blue-600 underline block mb-4">{{ __('Edit Event') }}</a>
 

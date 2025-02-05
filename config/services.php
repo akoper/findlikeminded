@@ -57,4 +57,11 @@ return [
         'customer_billing_portal_url' => env('STRIPE_CUSTOMER_BILLING_PORTAL_URL')
     ],
 
+    'mailgun' => [
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
+        'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        'scheme' => 'https',
+    ],
+
 ];
