@@ -10,7 +10,8 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class Email extends Mailable implements ShouldQueue
+//class Email extends Mailable implements ShouldQueue
+class Email extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +20,7 @@ class Email extends Mailable implements ShouldQueue
      */
     public function __construct(
         public $subject,
-        public $message
+        public $emailmessage
     ) { }
 
     /**
@@ -28,7 +29,7 @@ class Email extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Test email from FindLikeMinded',
+            subject: $this->subject,
         );
     }
 

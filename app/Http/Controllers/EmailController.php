@@ -35,11 +35,19 @@ class EmailController extends Controller
      */
     public function send(Request $request): View
     {
+        $validated = $request->validate([
+            'subject' => 'required|max:255',
+            'message' => 'required|max:3000',
+            'type' => 'string',
+            'group_id' => 'nullable|integer',
+            'event_id' => 'nullable|integer'
+        ]);
+
+        $subject = $request->input('subject');
+        $emailmessage = $request->input('message');
         $type = $request->input('type');
         $group_id = $request->get('group_id');
         $event_id = $request->get('event_id');
-        $subject = $request->input('subject');
-        $message = $request->input('message');
 
         $recipient_ids = [];
 
@@ -61,6 +69,10 @@ class EmailController extends Controller
                 ->where('id', $event_id)->get();
         }
 
+        if(empty($recipient_ids)) {
+            return view('email-none');
+        }
+
         $emails = [];
 
         foreach($recipient_ids as $recipient) {
@@ -71,7 +83,7 @@ class EmailController extends Controller
 //        dd($emails);
 
         foreach($emails as $email) {
-            Mail::to($email)->send(new Email($subject, $message));
+            Mail::to($email)->send(new Email($subject, $emailmessage));
         }
 
 //        foreach($emails as $email) {
