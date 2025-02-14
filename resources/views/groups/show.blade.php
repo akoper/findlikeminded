@@ -75,10 +75,10 @@
                 <div class="mb-2">
                     <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="location">Search for and add a user as an administrator to group (there can be many) *</label>
                     <input type="hidden" name="group_id" id="group_id" value="{{ $group->id }}">
-                    <input type="hidden" name="user_id" id="user_id" value={{ old('user_id') }}>
+                    <input type="hidden" name="user_id" id="user_id" value="{{ old('user_id') }}">
                     <input
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        name="user_name" id="user_name" type="text" autocomplete="off" value={{ old('user_name') }}>
+                        name="user_name" id="user_name" type="text" autocomplete="off" value="{{ old('user_name') }}">
                     @error('user_name')
                     <div class="alert text-red-600 alert-danger">{{ $message }}</div>
                     @enderror

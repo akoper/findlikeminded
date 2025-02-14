@@ -28,7 +28,7 @@
                     <div>
                         <input type="text" name="name" id="name" placeholder="Topic"
                                class="w-full mb-1 sm:w-16 sm:mb-0 md:w-36 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
-                        <input type="hidden" name="location_id_navigation" id="location_id_navigation" value={{ old('location_id_navigation') }}>
+                        <input type="hidden" name="location_id_navigation" id="location_id_navigation" value="{{ old('location_id_navigation') }}">
                         <input type="text" name="location_name_navigation" id="location_name_navigation" placeholder="City" autocomplete="off"
                                class="w-full sm:w-20 md:w-40 lg:w-40 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring"/>
                         <button class="w-full py-2 mt-2 sm:w-16 sm:mt-0 md:px-3 lg:w-32 lg:ml-2 xl:w-40 inline-block text:px-6 text-sm bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg">Search</button>

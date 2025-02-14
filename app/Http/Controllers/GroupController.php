@@ -208,7 +208,7 @@ class GroupController extends Controller implements HasMiddleware
         Auth::User()->groups()->detach($group_id);
 
         $subscription = Auth::user()->subscription(config('services.stripe.prod_id'));
-        if ($subscription->quantity > 0) {
+        if (isset($subscription->quantity) && $subscription->quantity >= 0) {
             $subscription->updateQuantity($subscription->quantity - 1);
         }
 

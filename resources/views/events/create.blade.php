@@ -10,7 +10,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="name">Name *</label>
             <input
                 class="required shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="name" id="name" type="text" value={{ old('name') }}>
+                name="name" id="name" type="text" value="{{ old('name') }}">
             @error('name')
                 <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
@@ -29,7 +29,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100" for="location">Location *</label>
             <input
                 class="required shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="location" id="location" type="text" value={{ old('location') }}>
+                name="location" id="location" type="text" value="{{ old('location') }}">
             @error('location')
                 <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
@@ -39,7 +39,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Address (street, city, state) *</label>
             <input
                 class="required shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="address" id="address" type="text" value={{ old('address') }}>
+                name="address" id="address" type="text" value="{{ old('address') }}">
             @error('address')
                 <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
@@ -49,7 +49,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Start Date *</label>
             <input
                 class="required shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="start_date" id="start_date" type="date" value={{ old('start_date') }}>
+                name="start_date" id="start_date" type="date" value="{{ old('start_date') }}">
             @error('start_date')
                 <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
@@ -59,7 +59,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Start Time *</label>
             <input
                 class="required shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="start_time" id="start_time" type="time" value={{ old('start_time') }}>
+                name="start_time" id="start_time" type="time" value="{{ old('start_time') }}">
             @error('start_time')
                 <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
@@ -69,7 +69,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="location">End Date</label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="end_date" id="end_date" type="date" value={{ old('end_date') }}>
+                name="end_date" id="end_date" type="date" value="{{ old('end_date') }}">
             @error('end_date')
                 <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
@@ -79,7 +79,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="location">End Time</label>
             <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="end_time" id="end_time" type="time" value={{ old('end_time') }}>
+                name="end_time" id="end_time" type="time" value="{{ old('end_time') }}">
             @error('end_time')
                 <div class="alert text-red-600 alert-danger">{{ $message }}</div>
             @enderror
